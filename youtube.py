@@ -17,10 +17,10 @@ class Youtube():
 
         try:
             credentials = google.oauth2.credentials.Credentials.from_authorized_user_file(clientSecretsFile)
-        except ValueError as e: # first run with new secret.json
+        except (ValueError) as e: # first run with new secret.json
             flow = InstalledAppFlow.from_client_secrets_file(clientSecretsFile, ["https://www.googleapis.com/auth/youtube"])
             credentials = flow.run_local_server(port=0)
-            with open(clientSecretsFile, 'w') as file:
+            with open(clientSecretsFile, 'w+') as file:
                 file.write(credentials.to_json())
         self.youtube = googleapiclient.discovery.build("youtube", "v3", credentials=credentials)
 
@@ -42,6 +42,9 @@ class Youtube():
         text = re.sub(r'\(.*?\)', '', text)
         text = re.sub(r'\[.*?\]', '', text)
 
+        #"Artist: song" -> "Artist - song"
+        #We don't care if it also affects the title, it leads to better sorting
+        text = re.sub(r':', ' - ', text)
         # Replace punctuation with spaces
         text = re.sub(r'[^\w\s-]', ' ', text)
 
