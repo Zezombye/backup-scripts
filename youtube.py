@@ -265,7 +265,7 @@ class Youtube():
         with open("bestof.json", "w+", encoding="utf-8") as f:
             f.write(json.dumps([{
                 "title": v["title"],
-                "description": v["description"],
+                #"description": v["description"],
                 "channelName": v["channelName"],
                 "channelId": v["channelId"],
                 "id": v["id"],
