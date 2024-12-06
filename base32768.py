@@ -29,13 +29,14 @@ for c in compressed_alphabet:
         chr_to_append = chr(ord(c)+i)
         if chr_to_append == "\u115F": #some zero width space thing
             chr_to_append = "\uFFED" #￭
-        encode_repertoire.append()
+        encode_repertoire.append(chr_to_append)
 
 if len(encode_repertoire) != 32768 + 128:
     raise ValueError("Invalid length for encode repertoire %s" % (len(encode_repertoire)))
 
-for i in range(0, len(encode_repertoire), 64):
-    print("r'|"+"|".join(encode_repertoire[i:i+64])+"|'")
+#debug
+#for i in range(0, len(encode_repertoire), 64):
+#    print("r'|"+"|".join(encode_repertoire[i:i+64])+"|'")
 
 lookup_e[15] = encode_repertoire[:32768]
 lookup_e[7] = encode_repertoire[32768:]
