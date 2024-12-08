@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+import base64
 import os, json, sys, re
 import base32768
 
@@ -8,6 +9,20 @@ SEPARATOR = "︱"
 def guidToBase32768(guidStr):
     guidBytes = bytes.fromhex(guidStr.replace("-", ""))
     return base32768.encode(guidBytes)
+
+
+def isValidYtPlaylistId(playlistId):
+    return re.match("^PL[A-Za-z0-9_-]{16,32}$", playlistId) is not None
+
+def isValidYtVideoId(videoId):
+    return re.match("^[A-Za-z0-9_-]{11}$", videoId) is not None
+
+def ytPlaylistIdToBase32768(playlistId):
+    #Note: video ID to base 32768 is useless because titles are max 100 characters so we won't hit the 255 char limit.
+    #Additionally, it is useful to have easy access to the video id.
+    if not isValidYtPlaylistId(playlistId):
+        raise ValueError("Invalid playlist id '%s'" % (playlistId))
+    return base32768.encode(base64.urlsafe_b64decode(playlistId[2:]))
 
 def sanitizeForWindowsFilename(s):
     return s.translate(str.maketrans({
@@ -51,4 +66,5 @@ def sanitizeForWindowsFilename(s):
         "\u001D": " ",
         "\u001E": " ",
         "\u001F": " ",
+        "\u007F": " ",
     })).strip()

@@ -8,6 +8,7 @@ import unicodedata
 import re
 import base32768
 import utils
+import youtube
 
 import requests
 
@@ -30,6 +31,8 @@ class Notion():
 
         self.session = requests.session()
         self.session.headers = {"Cookie": self.notionCookie, **notionSettings["headers"]}
+
+        self.youtube = youtube.Youtube()
 
 
     def make_request(self, method, url, data=None):
@@ -62,12 +65,16 @@ class Notion():
                 "id": block["id"],
                 "title": block["properties"]["title"][0][0],
                 "parentId": block["parent_id"] if block["parent_id"] != self.PRIVATE_SPACE_ID else None,
+                "ytVideoIds": [],
+                "ytPlaylistIds": [],
+                "createdTimestampMs": block["created_time"],
+                "lastEditedTimestampMs": block["last_edited_time"],
             }
 
         return pages
 
-    def getPageBlocks(self, pageId):
-        print("Getting page blocks of '%s'" % (pageId))
+    def getPageBlocks(self, pageId, pageTitle):
+        print("Getting page blocks of '%s' (%s)" % (pageId, pageTitle))
 
         blocks = []
         cursorStack = []
@@ -83,7 +90,7 @@ class Notion():
                 "omitExistingRecordVersions": [],
             })
 
-            blocks.extend([b["value"]["value"] for b in r["recordMap"]["block"].values() if b["value"]["value"]["id"] not in [b2["id"] for b2 in blocks]])
+            blocks.extend([b["value"]["value"] for b in r["recordMap"]["block"].values() if "value" in b["value"] and b["value"]["value"]["id"] not in [b2["id"] for b2 in blocks]])
 
             if len(r["cursors"]) == 0:
                 break
@@ -138,16 +145,25 @@ class Notion():
                 print("Creating directory '%s' for page id '%s'" % (targetDir, pageId))
             os.makedirs(targetDir, exist_ok=True)
 
+            with open(targetDir+"/_page.json", "w+", encoding="utf-8") as f:
+                f.write(json.dumps(pages[pageId], indent=4, ensure_ascii=False))
 
+            pages[pageId]["ytVideoIds"] = list(set(pages[pageId]["ytVideoIds"]))
+            for ytVideoId in pages[pageId]["ytVideoIds"]:
+                print("Downloading yt video '%s'" % (ytVideoId))
+                self.youtube.download_video(ytVideoId, targetDir)
 
-
+            pages[pageId]["ytPlaylistIds"] = list(set(pages[pageId]["ytPlaylistIds"]))
+            for ytPlaylistId in pages[pageId]["ytPlaylistIds"]:
+                print("Downloading yt playlist '%s'" % (ytPlaylistId))
+                self.youtube.download_playlist(ytPlaylistId, targetDir)
 
 
 
 if __name__ == "__main__":
     notion = Notion()
 
-    #base64.urlsafe_b64decode("PLDS8MSVtwiPYFV57YlnPG1gpnH6u8Q-yX==")
+    #notion.getPageBlocks("dba96d53-ce68-40bb-8161-23041e3816c9", ""); exit()
 
     pages = notion.getPrivatePages()
     print(json.dumps(pages, indent=4, ensure_ascii=False))
@@ -156,21 +172,40 @@ if __name__ == "__main__":
     while True:
         hasDumpedPage = False
 
-        for page in pagesToDump:
-            if page in pages and "blocks" in pages[page]:
+        for pageId in pagesToDump:
+            if pageId in pages and "blocks" in pages[pageId]:
                 continue
             else:
-                #blocks = notion.getPageBlocks(page)
-                #for block in blocks:
-                #    if block["type"] == "page" and block["parent_id"] == page:
-                #        pagesToDump.append(block["id"])
-                #        pages[block["id"]] = {
-                #            "id": block["id"],
-                #            "title": block["properties"]["title"][0][0],
-                #            "parentId": block["parent_id"] if block["parent_id"] != self.PRIVATE_SPACE_ID else None,
-                #        }
-                #pages[page]["blocks"] = blocks
-                pages[page]["blocks"] = []
+                blocks = notion.getPageBlocks(pageId, pages[pageId]["title"])
+                for block in blocks:
+                    if block["type"] == "page" and block["parent_id"] == pageId and block["alive"]:
+                        pagesToDump.append(block["id"])
+                        pages[block["id"]] = {
+                            "id": block["id"],
+                            "title": block["properties"]["title"][0][0],
+                            "parentId": block["parent_id"] if block["parent_id"] != notion.PRIVATE_SPACE_ID else None,
+                            "ytVideoIds": [],
+                            "ytPlaylistIds": [],
+                            "createdTimestampMs": block["created_time"],
+                            "lastEditedTimestampMs": block["last_edited_time"],
+                        }
+
+                #Easier to use regex than to parse whatever nested hell Notion's blocks are
+                #We assume URLs are an entire string (which they are for the stuff I've checked), to not match the linked videos in the description
+                for match in re.finditer(r"\"((?:https?:)?\/\/)?((?:www|m)\.)?((((?:youtube(?:-nocookie)?\.com))(\/(?:[\w\-]+\?v=|playlist\/?\?list=|v\/)))|(youtu\.be\/))(?P<id>[A-Za-z0-9_-]+)(\S+)?\"", json.dumps(blocks), re.IGNORECASE):
+                    try:
+                        id = match.groupdict()["id"]
+                        if utils.isValidYtVideoId(id):
+                            pages[pageId]["ytVideoIds"].append(id)
+                        elif utils.isValidYtPlaylistId(id):
+                            pages[pageId]["ytPlaylistIds"].append(id)
+                        else:
+                            raise ValueError("Invalid id '%s'" % (id))
+                    except Exception as e:
+                        print("Could not parse youtube url '%s': %s" % (match, e))
+                        raise
+
+                pages[pageId]["blocks"] = blocks
                 hasDumpedPage = True
 
         if not hasDumpedPage:

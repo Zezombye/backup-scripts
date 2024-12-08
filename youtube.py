@@ -2,6 +2,8 @@
 
 import os
 import json
+import subprocess
+import sys
 import time
 import unicodedata
 import re
@@ -9,8 +11,10 @@ import googleapiclient.discovery
 from google_auth_oauthlib.flow import InstalledAppFlow
 from collections import defaultdict
 import google.oauth2
+import utils
 
 class Youtube():
+#
 
     def __init__(self):
         clientSecretsFile = "c:/users/zezombye/yt_client_secret.json"
@@ -77,8 +81,28 @@ class Youtube():
 
         return title.title()
 
+    def get_playlist_info(self, playlistId):
+        print("Getting info of playlist '%s'" % (playlistId))
+        try:
+            r = self.youtube.playlists().list(
+                part="snippet,contentDetails,id,player,status",
+                id=playlistId,
+                maxResults=25
+            ).execute()
 
-    def fetch_playlist(self, playlist_id):
+            playlistInfo = r["items"][0]
+            return {
+                "id": playlistInfo["id"],
+                "channelId": playlistInfo["snippet"]["channelId"],
+                "channelName": playlistInfo["snippet"]["channelTitle"],
+                "title": playlistInfo["snippet"]["title"],
+                "description": playlistInfo["snippet"]["description"],
+            }
+        except Exception as e:
+            print("Could not get info of playlist '%s': %s" % (playlistId, e))
+            raise
+
+    def get_playlist_videos(self, playlist_id):
         print("Fetching playlist '%s'" % (playlist_id))
         playlist_items = []
         next_page_token = None
@@ -110,23 +134,57 @@ class Youtube():
             "id": i["snippet"]["resourceId"]["videoId"],
             "playlistitem_id": i["id"],
             "position": i["snippet"]["position"],
-        } for i in playlist_items]
+        } for i in playlist_items if not (i["snippet"]["title"] == "Private video" and i["status"]["privacyStatus"] == "private")]
 
 
-    def compare_playlists(self, new_playlist, existing_playlist_path):
-        """Compare new playlist with an existing playlist."""
-        if not os.path.exists(existing_playlist_path):
-            return [], new_playlist, []
+    def download_video(self, videoId, destinationDir, playlistIndex=None):
+        if not utils.isValidYtVideoId(videoId):
+            raise ValueError("Invalid video id '%s'" % (videoId))
 
-        with open(existing_playlist_path, 'r', encoding='utf-8') as f:
-            old_playlist = json.load(f)
+        for file in os.listdir(destinationDir):
+            if any([x == videoId for x in file.split(utils.SEPARATOR)[:2]]):
+                print("Video '%s' is already downloaded" % (videoId))
+                return
 
-        old_video_ids = {item['snippet']['resourceId']['videoId'] for item in old_playlist}
-        new_video_ids = {item['snippet']['resourceId']['videoId'] for item in new_playlist}
 
-        removed_videos = old_video_ids - new_video_ids
+        print("Downloading video '%s'" % (videoId))
+        try:
+            #Note: max resolution is 720p to not take gigabytes of data for podcasts. This is for backups, we don't need high resolution
+            #Going from 1080p to 720p is up to 80% reduction in size
+            subprocess.check_output('yt-dlp "https://www.youtube.com/watch?v='+videoId+'" --abort-on-error --embed-metadata --embed-subs --write-subs --write-auto-subs --sub-lang "en.*",en,en-US --embed-thumbnail --compat-options no-keep-subs --embed-info-json -o "'+("%02d"%(playlistIndex)+utils.SEPARATOR if playlistIndex is not None else "")+'%(id)s'+utils.SEPARATOR+'%(uploader).100B'+utils.SEPARATOR+'%(title).200B.%(ext)s" --trim-filenames 250 -f bestvideo[height<=720]+bestaudio/best[height<=720] --merge-output-format mkv', cwd=destinationDir)
+        except subprocess.CalledProcessError as e:
+            print("Could not download video '%s':\n%s" % (videoId, e.output.decode()))
+            raise
 
-        return removed_videos, new_playlist, []
+
+
+
+    def download_playlist(self, playlistId, destinationDir):
+        if not utils.isValidYtPlaylistId(playlistId):
+            raise ValueError("Invalid playlist id '%s'" % (playlistId))
+
+        base32768id = utils.ytPlaylistIdToBase32768(playlistId)
+        playlistInfo = self.get_playlist_info(playlistId)
+
+        print("Downloading playlist '%s' (%s)" % (playlistId, playlistInfo["title"]))
+
+        playlistDir = utils.sanitizeForWindowsFilename(playlistInfo["title"]+utils.SEPARATOR+base32768id)
+
+        for file in os.listdir(destinationDir):
+            if file.endswith(utils.SEPARATOR+base32768id) and file != playlistDir:
+                print("Renaming dir '%s' for playlist '%s'" % (file, playlistInfo["title"]))
+                os.rename(os.path.join(destinationDir, file), os.path.join(destinationDir, playlistDir))
+
+        os.makedirs(os.path.join(destinationDir, playlistDir), exist_ok=True)
+
+        videos = self.get_playlist_videos(playlistId)
+        for video in videos:
+            try:
+                self.download_video(video["id"], os.path.join(destinationDir, playlistDir), video["position"]+1)
+            except Exception as e:
+                print("Could not download video '%s' (%s)" % (video["id"], video["title"]), file=sys.stderr)
+                #Do not raise, it was very probably a video which is no longer available
+
 
 
     def sort_playlist(self, playlist_id, playlist_items):
@@ -185,18 +243,12 @@ class Youtube():
 
 
 
-
-
-
     def main(self):
-
-
-
         playlist_id = self.BEST_OF_PLAYLIST_ID
 
         # Fetch the playlist
         print("Fetching playlist...")
-        videos = self.fetch_playlist(playlist_id)
+        videos = self.get_playlist_videos(playlist_id)
 
         print("Fetching video details")
 
@@ -270,6 +322,7 @@ class Youtube():
                 "channelId": v["channelId"],
                 "id": v["id"],
                 "publishedAt": v["publishedAt"],
+                "songHash": self.getSongHash(v),
             } for v in videos], indent=4, ensure_ascii=False))
 
         return
@@ -304,4 +357,4 @@ class Youtube():
 
 if __name__ == "__main__":
     youtube = Youtube()
-    youtube.main()
+    #youtube.main()
