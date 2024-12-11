@@ -12,9 +12,9 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from collections import defaultdict
 import google.oauth2
 import utils
+import config
 
 class Youtube():
-#
 
     def __init__(self):
         clientSecretsFile = "c:/users/zezombye/yt_client_secret.json"
@@ -26,10 +26,9 @@ class Youtube():
             credentials = flow.run_local_server(port=0)
             with open(clientSecretsFile, 'w+') as file:
                 file.write(credentials.to_json())
-        self.youtube = googleapiclient.discovery.build("youtube", "v3", credentials=credentials)
-
-        self.BEST_OF_PLAYLIST_ID = "PLDS8MSVtwiPYVvz3D43_gWJGfXKv8ZTxg"
-        self.WL_ID = "PLK5yrmOBPizjuP7IUTU3HcCo3YJ3L96Dz"
+        self.ytApiClient = googleapiclient.discovery.build("youtube", "v3", credentials=credentials)
+        self.BACKUP_DIR = config.BACKUP_DIR+"/youtube/"
+        self.REGION_CODE = "FR"
 
 
     def normalize(self, text):
@@ -84,7 +83,7 @@ class Youtube():
     def get_playlist_info(self, playlistId):
         print("Getting info of playlist '%s'" % (playlistId))
         try:
-            r = self.youtube.playlists().list(
+            r = self.ytApiClient.playlists().list(
                 part="snippet,contentDetails,id,player,status",
                 id=playlistId,
                 maxResults=25
@@ -102,13 +101,14 @@ class Youtube():
             print("Could not get info of playlist '%s': %s" % (playlistId, e))
             raise
 
-    def get_playlist_videos(self, playlist_id):
+    def get_playlist_videos(self, playlist_id, with_details=True):
         print("Fetching playlist '%s'" % (playlist_id))
         playlist_items = []
+        total_items_count = None
         next_page_token = None
 
         while len(playlist_items) < 9999999:
-            request = self.youtube.playlistItems().list(
+            request = self.ytApiClient.playlistItems().list(
                 part="snippet,contentDetails,status,id",
                 playlistId=playlist_id,
                 maxResults=50,
@@ -117,7 +117,8 @@ class Youtube():
             response = request.execute()
             playlist_items.extend(response['items'])
             next_page_token = response.get('nextPageToken')
-            print("Got %s video(s)" % (len(playlist_items)))
+            total_items_count = response["pageInfo"]["totalResults"]
+            print("Got %s/%s video(s)" % (len(playlist_items), total_items_count))
             if not next_page_token:
                 break
 
@@ -125,16 +126,46 @@ class Youtube():
         with open("debug/yt_playlist.json", "w+", encoding="utf-8") as f:
             f.write(json.dumps(playlist_items, indent=4, ensure_ascii=False))
 
-        return [{
+        videos = [{
             "publishedAt": i["snippet"]["publishedAt"],
             "title": i["snippet"]["title"],
             "description": i["snippet"]["description"],
-            "channelName": i["snippet"]["videoOwnerChannelTitle"],
-            "channelId": i["snippet"]["videoOwnerChannelId"],
+            "channelName": i["snippet"].get("videoOwnerChannelTitle") or "null",
+            "channelId": i["snippet"].get("videoOwnerChannelId") or "null",
             "id": i["snippet"]["resourceId"]["videoId"],
             "playlistitem_id": i["id"],
             "position": i["snippet"]["position"],
-        } for i in playlist_items if not (i["snippet"]["title"] == "Private video" and i["status"]["privacyStatus"] == "private")]
+            "isAvailable": not(i["snippet"]["title"] == "Private video" and i["status"]["privacyStatus"] == "private"),
+        } for i in playlist_items]
+
+        if with_details:
+            print("Fetching video details")
+
+            videoDetails = []
+            for i in range(0, len(videos), 50):
+
+                response = self.ytApiClient.videos().list(
+                    part="contentDetails,status",
+                    id=",".join([v["id"] for v in videos[i:i+50]]),
+                ).execute()
+                videoDetails.extend(response['items'])
+                print("Got %s/%s video(s)" % (len(videoDetails), total_items_count))
+
+            with open("debug/yt_video_details.json", "w+", encoding="utf-8") as f:
+                f.write(json.dumps(videoDetails, indent=4, ensure_ascii=False))
+
+            for videoDetail in videoDetails:
+                matchingVideo = [v for v in videos if v["id"] == videoDetail["id"]][0]
+                if "regionRestriction" in videoDetail["contentDetails"] and (
+                    "allowed" in videoDetail["contentDetails"]["regionRestriction"] and self.REGION_CODE not in videoDetail["contentDetails"]["regionRestriction"]["allowed"]
+                    or "blocked" in videoDetail["contentDetails"]["regionRestriction"] and self.REGION_CODE in videoDetail["contentDetails"]["regionRestriction"]["blocked"]
+                ):
+                    matchingVideo["isAvailable"] = False
+
+        for video in videos:
+            video["songHash"] = self.getSongHash(video)
+
+        return videos
 
 
     def download_video(self, videoId, destinationDir, playlistIndex=None):
@@ -159,7 +190,10 @@ class Youtube():
 
 
 
-    def download_playlist(self, playlistId, destinationDir):
+    def download_playlist(self, playlistId, destinationDir=None):
+        if destinationDir is None:
+            destinationDir = self.BACKUP_DIR
+
         if not utils.isValidYtPlaylistId(playlistId):
             raise ValueError("Invalid playlist id '%s'" % (playlistId))
 
@@ -179,18 +213,21 @@ class Youtube():
 
         videos = self.get_playlist_videos(playlistId)
         for video in videos:
+            if not video["isAvailable"]:
+                print("Skipping downloading unavailable video '%s' (%s)" % (video["id"], video["title"]))
+                continue
             try:
                 self.download_video(video["id"], os.path.join(destinationDir, playlistDir), video["position"]+1)
             except Exception as e:
                 print("Could not download video '%s' (%s)" % (video["id"], video["title"]), file=sys.stderr)
-                #Do not raise, it was very probably a video which is no longer available
+                #Do not raise, it was very probably a video which is no longer available, which is why we back up :)
 
 
 
     def sort_playlist(self, playlist_id, playlist_items):
         print(f"Sorting playlist with {len(playlist_items)} videos...")
 
-        sorted_playlist = sorted(playlist_items, key=lambda x: self.getSongHash(x)+"["+x["id"]+"]")
+        sorted_playlist = sorted(playlist_items, key=lambda x: x["songHash"]+" ["+x["id"]+"]")
 
         for i in range(len(sorted_playlist) - 1, -1, -1):
             if playlist_items[i]["id"] != sorted_playlist[i]["id"]:
@@ -203,13 +240,13 @@ class Youtube():
                 else:
                     raise ValueError("Could not find video %s" % (sorted_playlist[i]))
 
-                print(f"Moving video {video_to_move["id"]} ({self.getSongHash(video_to_move)}) from position {video_to_move_idx} to {i}")
+                print(f"Moving video {video_to_move["id"]} ({video_to_move["songHash"]}) from position {video_to_move_idx} to {i}")
 
                 # Update the video position using the YouTube API
                 while True:
                     try:
                         time.sleep(1)
-                        self.youtube.playlistItems().update(
+                        self.ytApiClient.playlistItems().update(
                             part="snippet",
                             body={
                                 "id": video_to_move['playlistitem_id'],
@@ -242,88 +279,11 @@ class Youtube():
         return sorted_playlist
 
 
+    def delete_playlist_item(self, playlistItemId):
+        self.ytApiClient.playlistItems().delete(id=playlistItemId).execute()
+
 
     def main(self):
-        playlist_id = self.BEST_OF_PLAYLIST_ID
-
-        # Fetch the playlist
-        print("Fetching playlist...")
-        videos = self.get_playlist_videos(playlist_id)
-
-        print("Fetching video details")
-
-        videoDetails = []
-        for i in range(0, len(videos), 50):
-
-            response = self.youtube.videos().list(
-                part="contentDetails,status",
-                id=",".join([v["id"] for v in videos[i:i+50]]),
-            ).execute()
-            videoDetails.extend(response['items'])
-            print("Got %s video(s)" % (len(videoDetails)))
-
-
-        with open("debug/yt_video_details.json", "w+", encoding="utf-8") as f:
-            f.write(json.dumps(videoDetails, indent=4, ensure_ascii=False))
-
-
-        songHashes = set()
-        duplicatedSongHashes = set()
-        for video in videos:
-            if self.getSongHash(video) in songHashes:
-                duplicatedSongHashes.add(self.getSongHash(video))
-            else:
-                songHashes.add(self.getSongHash(video))
-
-        for video in videoDetails:
-            if video["status"]["privacyStatus"] != "public" or "regionRestriction" in video["contentDetails"] and ("allowed" in video["contentDetails"]["regionRestriction"] and "FR" not in video["contentDetails"]["regionRestriction"]["allowed"] or "blocked" in video["contentDetails"]["regionRestriction"] and "FR" in video["contentDetails"]["regionRestriction"]["blocked"]):
-                videoInPlaylist = [v for v in videos if v["id"] == video["id"]][0]
-                if self.getSongHash(videoInPlaylist) in duplicatedSongHashes:
-                    print("Video %s (%s) is no longer available but is a duplicate, removing it" % (videoInPlaylist["id"], videoInPlaylist["title"]))
-                    self.youtube.playlistItems().delete(id=videoInPlaylist['playlistitem_id']).execute()
-                    videos = [v for v in videos if v["id"] != videoInPlaylist["id"]]
-
-                else:
-                    print("Video %s (%s) is no longer available, put it again in the playlist for it to be removed" % (videoInPlaylist["id"], videoInPlaylist["title"]))
-
-
-        uniqueVideos = {}
-        for video in videos:
-            videoHash = self.getSongHash(video)
-            if videoHash in uniqueVideos:
-                print("Duplicate detected: video at pos %s with id %s '%s' is the same as video at pos %s with id %s '%s'" % (video["position"], video["id"], video["title"], uniqueVideos[videoHash]["position"], uniqueVideos[videoHash]["id"], uniqueVideos[videoHash]["title"]))
-            else:
-                uniqueVideos[videoHash] = video
-
-
-        artistCounts = {}
-        for video in videos:
-            artist = self.getSongHash(video).split(" - ")[0]
-            if artist in artistCounts:
-                artistCounts[artist] += 1
-            else:
-                artistCounts[artist] = 1
-
-        artistCounts = {k: v for k, v in sorted(artistCounts.items(), key=lambda item: -item[1])}
-        #for artist, artistCount in artistCounts.items():
-        #    print(artist, artistCount)
-
-        videos = self.sort_playlist(playlist_id, videos)
-
-        #for video in videos:
-        #    print(video["position"], self.getSongHash(video))
-
-
-        with open("bestof.json", "w+", encoding="utf-8") as f:
-            f.write(json.dumps([{
-                "title": v["title"],
-                #"description": v["description"],
-                "channelName": v["channelName"],
-                "channelId": v["channelId"],
-                "id": v["id"],
-                "publishedAt": v["publishedAt"],
-                "songHash": self.getSongHash(v),
-            } for v in videos], indent=4, ensure_ascii=False))
 
         return
 

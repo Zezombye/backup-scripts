@@ -9,7 +9,7 @@ import re
 import base32768
 import utils
 import youtube
-
+import config
 import requests
 
 class Notion():
@@ -22,7 +22,7 @@ class Notion():
             notionSettings = json.loads(f.read())
 
         self.PRIVATE_SPACE_ID = notionSettings["privateSpaceId"]
-        self.backupDir = "D:/bkp/no/"
+        self.BACKUP_DIR = config.BACKUP_DIR + "/notion/"
 
         with open(self.notionTokenFile, "r") as f:
             self.notionToken = f.read().strip()
@@ -127,10 +127,10 @@ class Notion():
             print("Backing up page %s ('%s')" % (pageId, pages[pageId]["path"]))
             pagePath = self.getPagePath(pages, pageId)
 
-            targetDir = os.path.join(self.backupDir, pagePath)
+            targetDir = os.path.join(self.BACKUP_DIR, pagePath)
 
             # Check if any directories end with the specific identifier
-            for root, dirs, _ in os.walk(self.backupDir):
+            for root, dirs, _ in os.walk(self.BACKUP_DIR):
                 for dirName in dirs:
                     dirPath = os.path.join(root, dirName).replace("\\", "/")
                     # Check if the directory ends with the required identifier
@@ -159,31 +159,32 @@ class Notion():
                 self.youtube.download_playlist(ytPlaylistId, targetDir)
 
 
+    def backupAllPages(self):
 
-if __name__ == "__main__":
-    notion = Notion()
+        #Todo: we can speed up the process and make the logs less verbose by obtaining a list of all the pages to backup by parsing the base32768 ids from the backup dir tree.
+        #Then we compare the modification date of _page.json to the modification date of the page itself.
+        #If these timestamps are equivalent, then skip the backup of the page. Else, backup the page and set the modification date of _page.json to match Notion.
+        #Calling the API that returns the list of recently visited pages will be useful, as else pages at level 2,4,etc will get downloaded anyway.
 
-    #notion.getPageBlocks("dba96d53-ce68-40bb-8161-23041e3816c9", ""); exit()
+        pages = self.getPrivatePages()
+        #print(json.dumps(pages, indent=4, ensure_ascii=False))
 
-    pages = notion.getPrivatePages()
-    print(json.dumps(pages, indent=4, ensure_ascii=False))
+        pagesToDump = list(pages.keys())
+        while True:
+            hasDumpedPage = False
 
-    pagesToDump = list(pages.keys())
-    while True:
-        hasDumpedPage = False
+            for pageId in pagesToDump:
+                if pageId in pages and "blocks" in pages[pageId]:
+                    continue
 
-        for pageId in pagesToDump:
-            if pageId in pages and "blocks" in pages[pageId]:
-                continue
-            else:
-                blocks = notion.getPageBlocks(pageId, pages[pageId]["title"])
+                blocks = self.getPageBlocks(pageId, pages[pageId]["title"])
                 for block in blocks:
                     if block["type"] == "page" and block["parent_id"] == pageId and block["alive"]:
                         pagesToDump.append(block["id"])
                         pages[block["id"]] = {
                             "id": block["id"],
                             "title": block["properties"]["title"][0][0],
-                            "parentId": block["parent_id"] if block["parent_id"] != notion.PRIVATE_SPACE_ID else None,
+                            "parentId": block["parent_id"] if block["parent_id"] != self.PRIVATE_SPACE_ID else None,
                             "ytVideoIds": [],
                             "ytPlaylistIds": [],
                             "createdTimestampMs": block["created_time"],
@@ -208,37 +209,39 @@ if __name__ == "__main__":
                 pages[pageId]["blocks"] = blocks
                 hasDumpedPage = True
 
-        if not hasDumpedPage:
-            break
+            if not hasDumpedPage:
+                break
 
 
-    #Assign depth and path to each page
-    pageIds = list(pages.keys())
-    sortedPageIds = []
-    while True:
-        needsResorting = False
-        for pageId in pageIds:
-            if pageId in sortedPageIds:
-                continue
-            if pages[pageId]["parentId"] is None:
-                sortedPageIds.append(pageId)
-            elif pages[pageId]["parentId"] in sortedPageIds:
-                sortedPageIds.append(pageId)
-            else:
-                needsResorting = True
-        if not needsResorting:
-            break
+        #Assign depth and path to each page
+        pageIds = list(pages.keys())
+        sortedPageIds = []
+        while True:
+            needsResorting = False
+            for pageId in pageIds:
+                if pageId in sortedPageIds:
+                    continue
+                if pages[pageId]["parentId"] is None:
+                    sortedPageIds.append(pageId)
+                elif pages[pageId]["parentId"] in sortedPageIds:
+                    sortedPageIds.append(pageId)
+                else:
+                    needsResorting = True
+            if not needsResorting:
+                break
 
-    if len(sortedPageIds) != len(pageIds):
-        raise ValueError("Page id sorting is buggy")
+        if len(sortedPageIds) != len(pageIds):
+            raise ValueError("Page id sorting is buggy")
 
-    for pageId in sortedPageIds:
-        pages[pageId]["path"] = pages[pageId]["title"] if pages[pageId]["parentId"] is None else pages[pages[pageId]["parentId"]]["path"] + " > " + pages[pageId]["title"]
-        pages[pageId]["depth"] = 0 if pages[pageId]["parentId"] is None else pages[pages[pageId]["parentId"]]["depth"] + 1
+        for pageId in sortedPageIds:
+            pages[pageId]["path"] = pages[pageId]["title"] if pages[pageId]["parentId"] is None else pages[pages[pageId]["parentId"]]["path"] + " > " + pages[pageId]["title"]
+            pages[pageId]["depth"] = 0 if pages[pageId]["parentId"] is None else pages[pages[pageId]["parentId"]]["depth"] + 1
 
-    notion.backupPages(pages)
+        self.backupPages(pages)
 
-    #blocks = notion.getPageBlocks("2cb3169b-e81d-4404-9552-8afdef34a062")
+
+if __name__ == "__main__":
+    notion = Notion()
     #print(blocks)
 
     #print("\n".join(sorted([p["title"] for p in pages.values()])))
