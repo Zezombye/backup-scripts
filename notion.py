@@ -22,6 +22,7 @@ class Notion():
             notionSettings = json.loads(f.read())
 
         self.PRIVATE_SPACE_ID = notionSettings["privateSpaceId"]
+        self.USER_ID = notionSettings["userId"]
         self.BACKUP_DIR = config.BACKUP_DIR + "/notion/"
 
         with open(self.notionTokenFile, "r") as f:
@@ -48,28 +49,86 @@ class Notion():
 
         return r.json()
 
-    def getPrivatePages(self):
-        r = self.make_request("post", "https://www.notion.so/api/v3/getUserSharedPagesInSpace", {
-            "includeDeleted": False,
+    def getPages(self):
+        r = self.make_request("post", "https://www.notion.so/api/v3/getRecentPageVisits", {
+            "limit": 9999,
             "spaceId": self.PRIVATE_SPACE_ID,
+            "userId": self.USER_ID,
         })
 
         pages = {}
 
+        #Some sort of intermediary page...?
+        #Have to take it into account to get the actual parents
+        transclusionContainers = []
+
+        #Apparently when you move a page to trash it doesn't move all children to trash...
+        #And some bug caused a deep, deep recursion
+        #Mark the ids of the pages moved to trash, as well as their children
+        #Also some weird template pages
+        deletedPageIds = [
+            "5213bbd3-c9a4-42d9-87d0-9dbf9e7025b2",
+            "d089a334-6150-405f-9a56-0e29ea172e10",
+            "5464121f-63f6-43ae-bbc8-4a5d861b8e22",
+            "307f4705-dab2-4cb6-8367-0c0310934be1",
+            "c19f2b71-de92-4d3c-9461-185dc3097f0d",
+            "18d422d2-3e7c-467f-9433-08b4a745482e",
+            "a8f93a94-6a94-4fdb-ba14-38d52f2c3396",
+            "3686fc2f-816a-4cce-a25e-253f571c1a0c",
+        ]
+
         for block in r["recordMap"]["block"].values():
-            block = block["value"]["value"]
-            if block["type"] != "page" or not block["alive"]:
+            if "value" not in block["value"]:
                 continue
+            block = block["value"]["value"]
+            #print(block["id"])
+            if block["type"] == "transclusion_container":
+                transclusionContainers.append(block)
+            if block["type"] != "page" or "properties" not in block or "title" not in block["properties"] or block.get("is_template"):
+                continue
+
+            if not block["alive"] or block.get("moved_to_trash_id"):
+                deletedPageIds.append(block["id"])
+                continue
+
+            if block["parent_table"] == "collection":
+                #We don't care about dummy pages made for todo lists. No important info should be in there anyway
+                continue
+
+            if block["parent_table"] not in ["space", "block"]:
+                raise ValueError("Unhandled parent_table '%s' for page '%s'" % (block["parent_table"], block["id"]))
+
 
             pages[block["id"]] = {
                 "id": block["id"],
                 "title": block["properties"]["title"][0][0],
-                "parentId": block["parent_id"] if block["parent_id"] != self.PRIVATE_SPACE_ID else None,
+                "parentId": None if block["parent_id"] == self.PRIVATE_SPACE_ID else block["parent_id"],
                 "ytVideoIds": [],
                 "ytPlaylistIds": [],
-                "createdTimestampMs": block["created_time"],
-                "lastEditedTimestampMs": block["last_edited_time"],
+                "createdTimestamp": int(block["created_time"]/1000),
+                "lastEditedTimestamp": int(block["last_edited_time"]/1000),
             }
+
+        #Sanity check in case Notion secretly changes the api or decreases the limit
+        if len(pages.keys()) < 165:
+            raise ValueError("Could not get all pages: only got %s" % (len(pages.keys())))
+
+        #Fix parents
+        for tc in transclusionContainers:
+            for pageId in tc["content"]:
+                pages[pageId]["parentId"] = tc["parent_id"]
+
+        #Fix children of deleted pages
+        while True:
+            hasMarkedPageAsDeleted = False
+            for pageId in list(pages.keys()):
+                if pages[pageId]["parentId"] in deletedPageIds or pageId in deletedPageIds:
+                    deletedPageIds.append(pageId)
+                    del pages[pageId]
+                    hasMarkedPageAsDeleted = True
+
+            if not hasMarkedPageAsDeleted:
+                break
 
         return pages
 
@@ -79,7 +138,7 @@ class Notion():
         blocks = []
         cursorStack = []
         while True:
-            r = self.make_request("post", "https://www.notion.so/api/v3/loadCachedPageChunkV2", {
+            r = self.make_request("post", "https://www.notion.so/api/v3/loadPageChunkV2", {
                 "page": {
                     "id": pageId,
                     "spaceId": self.PRIVATE_SPACE_ID,
@@ -121,10 +180,12 @@ class Notion():
 
     def backupPages(self, pages):
 
-        pageIds = sorted(list(pages.keys()), key=lambda x: (pages[x]["depth"], pages[x]["path"]))
+        pageIds = sorted(list(pages.keys()), key=lambda x: (pages[x]["depth"], pages[x]["displayPath"]))
 
         for pageId in pageIds:
-            print("Backing up page %s ('%s')" % (pageId, pages[pageId]["path"]))
+            if pages[pageId]["skipBackup"]:
+                continue
+            print("Backing up page %s ('%s')" % (pageId, pages[pageId]["displayPath"]))
             pagePath = self.getPagePath(pages, pageId)
 
             targetDir = os.path.join(self.BACKUP_DIR, pagePath)
@@ -148,6 +209,8 @@ class Notion():
             with open(targetDir+"/_page.json", "w+", encoding="utf-8") as f:
                 f.write(json.dumps(pages[pageId], indent=4, ensure_ascii=False))
 
+            os.utime(targetDir+"/_page.json", (pages[pageId]["lastEditedTimestamp"], pages[pageId]["lastEditedTimestamp"]))
+
             pages[pageId]["ytVideoIds"] = list(set(pages[pageId]["ytVideoIds"]))
             for ytVideoId in pages[pageId]["ytVideoIds"]:
                 print("Downloading yt video '%s'" % (ytVideoId))
@@ -161,56 +224,17 @@ class Notion():
 
     def backupAllPages(self):
 
-        #Todo: we can speed up the process and make the logs less verbose by obtaining a list of all the pages to backup by parsing the base32768 ids from the backup dir tree.
-        #Then we compare the modification date of _page.json to the modification date of the page itself.
-        #If these timestamps are equivalent, then skip the backup of the page. Else, backup the page and set the modification date of _page.json to match Notion.
-        #Calling the API that returns the list of recently visited pages will be useful, as else pages at level 2,4,etc will get downloaded anyway.
-
-        pages = self.getPrivatePages()
+        pages = self.getPages()
         #print(json.dumps(pages, indent=4, ensure_ascii=False))
 
-        pagesToDump = list(pages.keys())
-        while True:
-            hasDumpedPage = False
-
-            for pageId in pagesToDump:
-                if pageId in pages and "blocks" in pages[pageId]:
-                    continue
-
-                blocks = self.getPageBlocks(pageId, pages[pageId]["title"])
-                for block in blocks:
-                    if block["type"] == "page" and block["parent_id"] == pageId and block["alive"]:
-                        pagesToDump.append(block["id"])
-                        pages[block["id"]] = {
-                            "id": block["id"],
-                            "title": block["properties"]["title"][0][0],
-                            "parentId": block["parent_id"] if block["parent_id"] != self.PRIVATE_SPACE_ID else None,
-                            "ytVideoIds": [],
-                            "ytPlaylistIds": [],
-                            "createdTimestampMs": block["created_time"],
-                            "lastEditedTimestampMs": block["last_edited_time"],
-                        }
-
-                #Easier to use regex than to parse whatever nested hell Notion's blocks are
-                #We assume URLs are an entire string (which they are for the stuff I've checked), to not match the linked videos in the description
-                for match in re.finditer(r"\"((?:https?:)?\/\/)?((?:www|m)\.)?((((?:youtube(?:-nocookie)?\.com))(\/(?:[\w\-]+\?v=|playlist\/?\?list=|v\/)))|(youtu\.be\/))(?P<id>[A-Za-z0-9_-]+)(\S+)?\"", json.dumps(blocks), re.IGNORECASE):
-                    try:
-                        id = match.groupdict()["id"]
-                        if utils.isValidYtVideoId(id):
-                            pages[pageId]["ytVideoIds"].append(id)
-                        elif utils.isValidYtPlaylistId(id):
-                            pages[pageId]["ytPlaylistIds"].append(id)
-                        else:
-                            raise ValueError("Invalid id '%s'" % (id))
-                    except Exception as e:
-                        print("Could not parse youtube url '%s': %s" % (match, e))
-                        raise
-
-                pages[pageId]["blocks"] = blocks
-                hasDumpedPage = True
-
-            if not hasDumpedPage:
-                break
+        #We can speed up the process and make the logs less verbose by comparing the modification date of _page.json to the modification date of the page itself.
+        #If these timestamps are equivalent, then skip the backup of the page. Else, backup the page and set the modification date of _page.json to match Notion.
+        for pageId in pages:
+            pageJsonPath = os.path.join(self.BACKUP_DIR, self.getPagePath(pages, pageId), "_page.json")
+            if os.path.exists(pageJsonPath) and int(os.path.getmtime(pageJsonPath)) == pages[pageId]["lastEditedTimestamp"]:
+                pages[pageId]["skipBackup"] = True
+            else:
+                pages[pageId]["skipBackup"] = False
 
 
         #Assign depth and path to each page
@@ -234,8 +258,36 @@ class Notion():
             raise ValueError("Page id sorting is buggy")
 
         for pageId in sortedPageIds:
-            pages[pageId]["path"] = pages[pageId]["title"] if pages[pageId]["parentId"] is None else pages[pages[pageId]["parentId"]]["path"] + " > " + pages[pageId]["title"]
+            pages[pageId]["displayPath"] = pages[pageId]["title"] if pages[pageId]["parentId"] is None else pages[pages[pageId]["parentId"]]["displayPath"] + " > " + pages[pageId]["title"]
             pages[pageId]["depth"] = 0 if pages[pageId]["parentId"] is None else pages[pages[pageId]["parentId"]]["depth"] + 1
+
+
+        #Get content of each page
+        for pageId in sortedPageIds:
+            if pages[pageId]["skipBackup"]:
+                #print("Skipping backup of %s (%s), not modified" % (pageId, pages[pageId]["displayPath"]))
+                continue
+
+            blocks = self.getPageBlocks(pageId, pages[pageId]["displayPath"])
+
+            #Easier to use regex than to parse whatever nested hell Notion's blocks are
+            #We assume URLs are an entire string (which they are for the stuff I've checked), to not match the linked videos in the description
+            for match in re.finditer(r"\"((?:https?:)?\/\/)?((?:www|m)\.)?((((?:youtube(?:-nocookie)?\.com))(\/(?:[\w\-]+\?v=|playlist\/?\?list=|v\/)))|(youtu\.be\/))(?P<id>[A-Za-z0-9_-]+)(\S+)?\"", json.dumps(blocks), re.IGNORECASE):
+                try:
+                    id = match.groupdict()["id"]
+                    if utils.isValidYtVideoId(id):
+                        pages[pageId]["ytVideoIds"].append(id)
+                    elif utils.isValidYtPlaylistId(id):
+                        pages[pageId]["ytPlaylistIds"].append(id)
+                    else:
+                        raise ValueError("Invalid id '%s'" % (id))
+                except Exception as e:
+                    print("Could not parse youtube url '%s': %s" % (match, e))
+                    raise
+
+            pages[pageId]["blocks"] = blocks
+
+
 
         self.backupPages(pages)
 
