@@ -17,6 +17,8 @@ def sortMusicPlaylists():
     #Todo: handle the fact that songs in the romantic/ballads playlists should also be in the best of playlist.
     #The romantic playlist should not be sorted, but both should be checked for duplicates.
     #Most notably, if a song becomes unavailable in those playlists, and a video with the same song hash exists in the best of playlist, that video should be added to that playlist (with the same position) and the unavailable video should be removed.
+    #Plus, if the song hash of a song in a child playlist matches a song in the parent playlist, but the videos are different, the video in the child playlist should be replaced.
+    #Lastly, if a song in a parent playlist is removed, it should be removed from the child playlists.
     #This ensures I only have one playlist to truly maintain.
 
     for playlistId in config.ytMusicPlaylists:
@@ -97,6 +99,9 @@ def backupYtPlaylists():
     print("Backing up playlists...")
     for playlistId in config.ytPlaylistsToDownload:
         youtube.download_playlist(playlistId)
+
+    for playlistId in config.ytMusicPlaylistsToDownload:
+        youtube.download_playlist(playlistId, audioOnly=True)
 
 
 def backupNotion():

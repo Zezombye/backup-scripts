@@ -133,7 +133,7 @@ class Notion():
         return pages
 
     def getPageBlocks(self, pageId, pageTitle):
-        print("Getting page blocks of '%s' (%s)" % (pageId, pageTitle))
+        #print("Getting page blocks of '%s' (%s)" % (pageId, pageTitle))
 
         blocks = []
         cursorStack = []

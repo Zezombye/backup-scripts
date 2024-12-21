@@ -12,7 +12,7 @@ def guidToBase32768(guidStr):
 
 
 def isValidYtPlaylistId(playlistId):
-    return re.match("^PL[A-Za-z0-9_-]{16,32}$", playlistId) is not None
+    return len(playlistId) in [18, 34] and re.match("^PL[A-Za-z0-9_-]{16,32}$", playlistId) is not None
 
 def isValidYtVideoId(videoId):
     return re.match("^[A-Za-z0-9_-]{11}$", videoId) is not None
