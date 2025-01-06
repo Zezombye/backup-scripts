@@ -112,6 +112,14 @@
         "songHash": "Avenged Sevenfold - Dear God"
     },
     {
+        "title": "Exist",
+        "channelName": "Avenged Sevenfold - Topic",
+        "channelId": "UCJls2FMEbRYxi28jcuKe2vA",
+        "id": "2fJulwIR2hU",
+        "publishedAt": "2024-12-21T19:00:07Z",
+        "songHash": "Avenged Sevenfold - Exist"
+    },
+    {
         "title": "Lost",
         "channelName": "Avenged Sevenfold - Topic",
         "channelId": "UCJls2FMEbRYxi28jcuKe2vA",
@@ -600,14 +608,6 @@
         "songHash": "Five Finger Death Punch - Gone Away"
     },
     {
-        "title": "I Apologize",
-        "channelName": "Five Finger Death Punch - Topic",
-        "channelId": "UC1P-VkqYRRNUxSeWkIUsYGA",
-        "id": "GFcMlAK0KuU",
-        "publishedAt": "2024-12-08T20:18:56Z",
-        "songHash": "Five Finger Death Punch - I Apologize"
-    },
-    {
         "title": "I Refuse",
         "channelName": "Five Finger Death Punch - Topic",
         "channelId": "UC1P-VkqYRRNUxSeWkIUsYGA",
@@ -782,6 +782,14 @@
         "id": "7QIudWEs4sM",
         "publishedAt": "2024-12-08T20:23:59Z",
         "songHash": "Helloween - Windmill"
+    },
+    {
+        "title": "HolyHell - \"The Fall\" (lyrics)",
+        "channelName": "Sav2TSO",
+        "channelId": "UCORIFggAjoOGrkt5b1v6aLA",
+        "id": "5fO9lVQ-wOk",
+        "publishedAt": "2024-12-25T14:06:04Z",
+        "songHash": "Holyhell - The Fall"
     },
     {
         "title": "The Reason",
@@ -1048,6 +1056,14 @@
         "songHash": "Linkin Park - One More Light"
     },
     {
+        "title": "POWERLESS",
+        "channelName": "Linkin Park - Topic",
+        "channelId": "UCxgN32UVVztKAQd2HkXzBtw",
+        "id": "7Cc4UsvNFBU",
+        "publishedAt": "2024-12-21T06:58:13Z",
+        "songHash": "Linkin Park - Powerless"
+    },
+    {
         "title": "Shadow of the Day",
         "channelName": "Linkin Park - Topic",
         "channelId": "UCxgN32UVVztKAQd2HkXzBtw",
@@ -1086,6 +1102,14 @@
         "id": "qu0k38VMaV4",
         "publishedAt": "2024-12-08T20:31:19Z",
         "songHash": "Linkin Park - What Ive Done"
+    },
+    {
+        "title": "Highlander (The One)",
+        "channelName": "Lost Horizon - Topic",
+        "channelId": "UCkFtK0U85lON2lmAH1WdD6A",
+        "id": "Qy1J_i32wTg",
+        "publishedAt": "2024-12-17T07:58:49Z",
+        "songHash": "Lost Horizon - Highlander"
     },
     {
         "title": "The Power of Love",
@@ -1352,6 +1376,14 @@
         "songHash": "Nightwish - Endless Forms Most Beautiful"
     },
     {
+        "title": "She Is My Sin",
+        "channelName": "Nightwish - Topic",
+        "channelId": "UCnDibivBAgWYKWi9qOiCNnA",
+        "id": "Sz6-mHQRbac",
+        "publishedAt": "2024-12-25T15:39:46Z",
+        "songHash": "Nightwish - She Is My Sin"
+    },
+    {
         "title": "Sleeping Sun",
         "channelName": "Nightwish - Topic",
         "channelId": "UCnDibivBAgWYKWi9qOiCNnA",
@@ -1406,14 +1438,6 @@
         "id": "soL8JK6kALc",
         "publishedAt": "2024-12-08T20:39:50Z",
         "songHash": "Pink Floyd - Hey You"
-    },
-    {
-        "title": "Mother",
-        "channelName": "Pink Floyd - Topic",
-        "channelId": "UCO6LS_5W7vqG9mALDNzSFug",
-        "id": "xe3NUKCnZp4",
-        "publishedAt": "2024-12-08T20:39:56Z",
-        "songHash": "Pink Floyd - Mother"
     },
     {
         "title": "On The Turning Away",
@@ -1614,14 +1638,6 @@
         "id": "NUoTS1xqpwo",
         "publishedAt": "2024-12-08T20:47:19Z",
         "songHash": "Scorpions - Believe In Love"
-    },
-    {
-        "title": "Holiday (2015 - Remaster)",
-        "channelName": "Scorpions - Topic",
-        "channelId": "UCL_jrFsNj-2iC9Obf5M8_uw",
-        "id": "Ze-to__6wgg",
-        "publishedAt": "2024-12-08T20:48:03Z",
-        "songHash": "Scorpions - Holiday"
     },
     {
         "title": "Lorelei",
@@ -1920,6 +1936,14 @@
         "songHash": "The Offspring - Kristy Are You Doing Okay"
     },
     {
+        "title": "Seawinds",
+        "channelName": "Therion - Topic",
+        "channelId": "UC40sQHbLVaMscosV6caWS0Q",
+        "id": "SFXcdZ-_NDg",
+        "publishedAt": "2024-12-25T14:05:38Z",
+        "songHash": "Therion - Seawinds"
+    },
+    {
         "title": "Fallen Angel",
         "channelName": "Three Days Grace - Topic",
         "channelId": "UCfgRkxIufLnYKicOY8aJQ2g",
@@ -2096,14 +2120,6 @@
         "songHash": "U2 - With Or Without You"
     },
     {
-        "title": "Utopia (feat. Chris Jones)",
-        "channelName": "Evanescence & Within Temptation Channel",
-        "channelId": "UC3a0lzV590EuG3MHWnmGQLw",
-        "id": "AtlMrsbyVBQ",
-        "publishedAt": "2024-12-08T21:10:04Z",
-        "songHash": "Utopia"
-    },
-    {
         "title": "All I Need",
         "channelName": "Within Temptation - Topic",
         "channelId": "UCeWkbf3RIeKRs8THlxPlUUA",
@@ -2216,6 +2232,14 @@
         "songHash": "Within Temptation - The Last Dance"
     },
     {
+        "title": "Utopia (feat. Chris Jones)",
+        "channelName": "Within Temptation - Topic",
+        "channelId": "UCeWkbf3RIeKRs8THlxPlUUA",
+        "id": "ynSu1aN8e-U",
+        "publishedAt": "2024-12-20T08:46:53Z",
+        "songHash": "Within Temptation - Utopia"
+    },
+    {
         "title": "What Have You Done (feat. Keith Caputo)",
         "channelName": "Within Temptation - Topic",
         "channelId": "UCeWkbf3RIeKRs8THlxPlUUA",
@@ -2232,12 +2256,36 @@
         "songHash": "Within Temptation - Where Is The Edge"
     },
     {
+        "title": "Eversleeping",
+        "channelName": "Xandria - Topic",
+        "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
+        "id": "Av-NlCSu0oM",
+        "publishedAt": "2024-12-19T10:51:03Z",
+        "songHash": "Xandria - Eversleeping"
+    },
+    {
+        "title": "In Remembrance",
+        "channelName": "Xandria - Topic",
+        "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
+        "id": "PGtVoGiR0RI",
+        "publishedAt": "2024-12-19T11:12:19Z",
+        "songHash": "Xandria - In Remembrance"
+    },
+    {
         "title": "Universal",
         "channelName": "Xandria - Topic",
         "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
         "id": "h3N-PRq1F0M",
         "publishedAt": "2024-12-08T21:15:22Z",
         "songHash": "Xandria - Universal"
+    },
+    {
+        "title": "Voyage of the Fallen",
+        "channelName": "Xandria - Topic",
+        "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
+        "id": "YkntepJUpoE",
+        "publishedAt": "2024-12-26T11:15:07Z",
+        "songHash": "Xandria - Voyage Of The Fallen"
     },
     {
         "title": "Again",

@@ -408,6 +408,14 @@
         "songHash": "Avenged Sevenfold - Dear God"
     },
     {
+        "title": "Exist",
+        "channelName": "Avenged Sevenfold - Topic",
+        "channelId": "UCJls2FMEbRYxi28jcuKe2vA",
+        "id": "2fJulwIR2hU",
+        "publishedAt": "2025-01-01T00:38:52Z",
+        "songHash": "Avenged Sevenfold - Exist"
+    },
+    {
         "title": "Hail to the King",
         "channelName": "Avenged Sevenfold - Topic",
         "channelId": "UCJls2FMEbRYxi28jcuKe2vA",
@@ -608,11 +616,11 @@
         "songHash": "Battle Beast - Unholy Savior"
     },
     {
-        "title": "Battle Beast - Wild Child (W.A.S.P. Cover - Japanese Bonus Track)",
-        "channelName": "Dimitris Milionis",
-        "channelId": "UCnhumqXoK3L9KHYMPwEhhlg",
-        "id": "UGxfT00NZl8",
-        "publishedAt": "2024-11-13T08:11:24Z",
+        "title": "Battle Beast - Wild Child (lyrics video)",
+        "channelName": "Hail The Beast",
+        "channelId": "UCke8aCShvqP7jO9u90lxJgg",
+        "id": "pdV44qxu1qA",
+        "publishedAt": "2024-12-18T07:37:31Z",
         "songHash": "Battle Beast - Wild Child"
     },
     {
@@ -1864,6 +1872,14 @@
         "songHash": "Edguy - King Of Fools"
     },
     {
+        "title": "Tears of a Mandrake",
+        "channelName": "Edguy - Topic",
+        "channelId": "UCAMgiVHUhXSfF2saNgAEH7A",
+        "id": "DGoqXJigrX8",
+        "publishedAt": "2024-12-20T09:31:46Z",
+        "songHash": "Edguy - Tears Of A Mandrake"
+    },
+    {
         "title": "Vain Glory Opera",
         "channelName": "Edguy - Topic",
         "channelId": "UCAMgiVHUhXSfF2saNgAEH7A",
@@ -2294,6 +2310,14 @@
         "id": "cCGIVUbXc60",
         "publishedAt": "2024-11-15T08:48:04Z",
         "songHash": "Gimme Gimme Gimme A Eurobeat Remix"
+    },
+    {
+        "title": "I Will Survive",
+        "channelName": "Gloria Gaynor - Topic",
+        "channelId": "UCeXpFNAbyg5V3z8oKx5EGyw",
+        "id": "FHhZPp08s74",
+        "publishedAt": "2024-12-19T05:37:28Z",
+        "songHash": "Gloria Gaynor - I Will Survive"
     },
     {
         "title": "I Stand Alone",
@@ -2862,6 +2886,14 @@
         "id": "7QIudWEs4sM",
         "publishedAt": "2024-11-15T02:26:39Z",
         "songHash": "Helloween - Windmill"
+    },
+    {
+        "title": "HolyHell - \"The Fall\" (lyrics)",
+        "channelName": "Sav2TSO",
+        "channelId": "UCORIFggAjoOGrkt5b1v6aLA",
+        "id": "5fO9lVQ-wOk",
+        "publishedAt": "2024-12-25T14:06:04Z",
+        "songHash": "Holyhell - The Fall"
     },
     {
         "title": "The Reason",
@@ -3552,6 +3584,14 @@
         "songHash": "Linkin Park - One More Light"
     },
     {
+        "title": "POWERLESS",
+        "channelName": "Linkin Park - Topic",
+        "channelId": "UCxgN32UVVztKAQd2HkXzBtw",
+        "id": "7Cc4UsvNFBU",
+        "publishedAt": "2024-12-21T06:58:12Z",
+        "songHash": "Linkin Park - Powerless"
+    },
+    {
         "title": "Shadow of the Day",
         "channelName": "Linkin Park - Topic",
         "channelId": "UCxgN32UVVztKAQd2HkXzBtw",
@@ -3614,6 +3654,14 @@
         "id": "lYwHhQiMGdE",
         "publishedAt": "2024-11-17T04:23:17Z",
         "songHash": "Lordi - Hard Rock Hallelujah"
+    },
+    {
+        "title": "Highlander (The One)",
+        "channelName": "Lost Horizon - Topic",
+        "channelId": "UCkFtK0U85lON2lmAH1WdD6A",
+        "id": "Qy1J_i32wTg",
+        "publishedAt": "2024-12-17T07:58:50Z",
+        "songHash": "Lost Horizon - Highlander"
     },
     {
         "title": "The Power of Love",
@@ -4328,6 +4376,14 @@
         "songHash": "Nanowar Of Steel - Valhalleluja"
     },
     {
+        "title": "Winterstorm in the Night (feat. Madeleine Liljestam)",
+        "channelName": "Nanowar of Steel - Topic",
+        "channelId": "UCWc4wCNn-f4hsdBCqfTjJ_w",
+        "id": "tqe1XBl055s",
+        "publishedAt": "2024-12-29T06:34:50Z",
+        "songHash": "Nanowar Of Steel - Winterstorm In The Night"
+    },
+    {
         "title": "Burn It to the Ground",
         "channelName": "Nickelback - Topic",
         "channelId": "UC1T4LYUer48KhKlrru13kUg",
@@ -4488,6 +4544,14 @@
         "songHash": "Nightwish - Last Ride Of The Day"
     },
     {
+        "title": "She Is My Sin",
+        "channelName": "Nightwish - Topic",
+        "channelId": "UCnDibivBAgWYKWi9qOiCNnA",
+        "id": "Sz6-mHQRbac",
+        "publishedAt": "2024-12-25T15:39:46Z",
+        "songHash": "Nightwish - She Is My Sin"
+    },
+    {
         "title": "Shudder Before the Beautiful",
         "channelName": "Nightwish - Topic",
         "channelId": "UCnDibivBAgWYKWi9qOiCNnA",
@@ -4537,7 +4601,7 @@
     },
     {
         "title": "Brain Power (Long Version)",
-        "channelName": "Noma - Topic",
+        "channelName": "NOMA - Topic",
         "channelId": "UCzPLtZrnv7bi4WzwD1HSaFg",
         "id": "cVP8D_FwPU8",
         "publishedAt": "2024-11-15T08:44:35Z",
@@ -4614,14 +4678,6 @@
         "id": "vcFXq5-XFeE",
         "publishedAt": "2024-11-16T04:52:34Z",
         "songHash": "Pink Floyd - Learning To Fly"
-    },
-    {
-        "title": "Mother",
-        "channelName": "Pink Floyd - Topic",
-        "channelId": "UCO6LS_5W7vqG9mALDNzSFug",
-        "id": "xe3NUKCnZp4",
-        "publishedAt": "2024-11-16T04:54:25Z",
-        "songHash": "Pink Floyd - Mother"
     },
     {
         "title": "On The Turning Away",
@@ -5360,6 +5416,14 @@
         "songHash": "Rem - Losing My Religion"
     },
     {
+        "title": "RIOT - Overkill but without the 40 second long end",
+        "channelName": "Dat Legendary Gamer",
+        "channelId": "UCzItEHUyRq0xYfbVihgokZw",
+        "id": "f4O2g_UB9sM",
+        "publishedAt": "2024-12-22T23:38:57Z",
+        "songHash": "Riot - Overkill But Without The 40 Second Long End"
+    },
+    {
         "title": "Audience Of One",
         "channelName": "Rise Against - Topic",
         "channelId": "UCNEOs26SV8KlC9XxqdR7jew",
@@ -6032,14 +6096,6 @@
         "songHash": "Scorpions - Catch Your Train"
     },
     {
-        "title": "Holiday (2015 - Remaster)",
-        "channelName": "Scorpions - Topic",
-        "channelId": "UCL_jrFsNj-2iC9Obf5M8_uw",
-        "id": "Ze-to__6wgg",
-        "publishedAt": "2024-11-17T12:08:22Z",
-        "songHash": "Scorpions - Holiday"
-    },
-    {
         "title": "Lorelei",
         "channelName": "Scorpions - Topic",
         "channelId": "UCL_jrFsNj-2iC9Obf5M8_uw",
@@ -6430,14 +6486,6 @@
         "id": "M3WPxuXq6QE",
         "publishedAt": "2024-11-17T00:50:11Z",
         "songHash": "Steve Ouimette - We Three Kings"
-    },
-    {
-        "title": "Steve Ouimette   Lou´s Revenge Guitar Hero 3 HD",
-        "channelName": "Cristian Silva",
-        "channelId": "UCkHQQcAJ7n715VWgULlgMfQ",
-        "id": "CPkOoUd4zy4",
-        "publishedAt": "2024-11-17T00:47:41Z",
-        "songHash": "Steve Ouimette Lous Revenge Guitar Hero 3 Hd"
     },
     {
         "title": "For the Love of God",
@@ -7206,6 +7254,30 @@
         "id": "_yoektCO0hA",
         "publishedAt": "2024-11-17T09:05:39Z",
         "songHash": "The Roues Brothers - Now Im Movin Out"
+    },
+    {
+        "title": "As the World Bleeds",
+        "channelName": "Theocracy - Topic",
+        "channelId": "UC0HijtVThn8Y_iUdVjEI6Ww",
+        "id": "Lyfhcb67WA8",
+        "publishedAt": "2024-12-21T10:54:40Z",
+        "songHash": "Theocracy - As The World Bleeds"
+    },
+    {
+        "title": "I Am",
+        "channelName": "Theocracy - Topic",
+        "channelId": "UC0HijtVThn8Y_iUdVjEI6Ww",
+        "id": "vfc8EjDuYNw",
+        "publishedAt": "2024-12-21T10:11:47Z",
+        "songHash": "Theocracy - I Am"
+    },
+    {
+        "title": "Seawinds",
+        "channelName": "Therion - Topic",
+        "channelId": "UC40sQHbLVaMscosV6caWS0Q",
+        "id": "SFXcdZ-_NDg",
+        "publishedAt": "2024-12-25T14:05:38Z",
+        "songHash": "Therion - Seawinds"
     },
     {
         "title": "The Kill",
@@ -8320,6 +8392,14 @@
         "songHash": "Within Temptation - The Last Dance"
     },
     {
+        "title": "Utopia (feat. Chris Jones)",
+        "channelName": "Within Temptation - Topic",
+        "channelId": "UCeWkbf3RIeKRs8THlxPlUUA",
+        "id": "ynSu1aN8e-U",
+        "publishedAt": "2024-12-20T08:46:53Z",
+        "songHash": "Within Temptation - Utopia"
+    },
+    {
         "title": "What Have You Done (feat. Keith Caputo)",
         "channelName": "Within Temptation - Topic",
         "channelId": "UCeWkbf3RIeKRs8THlxPlUUA",
@@ -8336,6 +8416,22 @@
         "songHash": "Within Temptation - Where Is The Edge"
     },
     {
+        "title": "Eversleeping",
+        "channelName": "Xandria - Topic",
+        "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
+        "id": "Av-NlCSu0oM",
+        "publishedAt": "2024-12-19T10:51:00Z",
+        "songHash": "Xandria - Eversleeping"
+    },
+    {
+        "title": "In Remembrance",
+        "channelName": "Xandria - Topic",
+        "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
+        "id": "PGtVoGiR0RI",
+        "publishedAt": "2024-12-19T11:12:19Z",
+        "songHash": "Xandria - In Remembrance"
+    },
+    {
         "title": "Nightfall",
         "channelName": "Xandria - Topic",
         "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
@@ -8350,6 +8446,14 @@
         "id": "h3N-PRq1F0M",
         "publishedAt": "2024-11-18T00:31:14Z",
         "songHash": "Xandria - Universal"
+    },
+    {
+        "title": "Voyage of the Fallen",
+        "channelName": "Xandria - Topic",
+        "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
+        "id": "YkntepJUpoE",
+        "publishedAt": "2024-12-20T08:24:37Z",
+        "songHash": "Xandria - Voyage Of The Fallen"
     },
     {
         "title": "Again",

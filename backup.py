@@ -41,6 +41,10 @@ def sortMusicPlaylists():
                     print("Video %s (%s) is no longer available but is a duplicate, removing it" % (video["id"], video["title"]))
                     youtube.delete_playlist_item(video["playlistitem_id"])
                     videos = [v for v in videos if v["id"] != video["id"]]
+                elif video["title"] in ["Deleted video", "Privated video"]:
+                    print("Video %s (%s) is no longer available, removing it" % (video["id"], video["title"]))
+                    youtube.delete_playlist_item(video["playlistitem_id"])
+                    videos = [v for v in videos if v["id"] != video["id"]]
                 else:
                     print("Video %s (%s) is no longer available, put it again in the playlist for it to be removed" % (video["id"], video["title"]))
 

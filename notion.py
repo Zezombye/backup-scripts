@@ -110,7 +110,7 @@ class Notion():
             }
 
         #Sanity check in case Notion secretly changes the api or decreases the limit
-        if len(pages.keys()) < 165:
+        if len(pages.keys()) < 130:
             raise ValueError("Could not get all pages: only got %s" % (len(pages.keys())))
 
         #Fix parents

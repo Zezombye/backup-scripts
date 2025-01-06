@@ -81,6 +81,14 @@ class Youtube():
 
             title = artist + " - " + title
 
+
+        #Special cases
+        specialCases = {
+            "or7GVQ9R-Lc": "Steve Ouimette - Lous Revenge",
+        }
+        if video["id"] in specialCases:
+            title = self.normalize(specialCases[video["id"]])
+
         return title.title()
 
     def get_playlist_info(self, playlistId):
@@ -138,7 +146,7 @@ class Youtube():
             "id": i["snippet"]["resourceId"]["videoId"],
             "playlistitem_id": i["id"],
             "position": i["snippet"]["position"],
-            "isAvailable": not(i["snippet"]["title"] == "Private video" and i["status"]["privacyStatus"] == "private"),
+            "isAvailable": not(i["snippet"]["title"] == "Private video" and i["status"]["privacyStatus"] == "private") and not (i["snippet"]["title"] == "Deleted video" and i["status"]["privacyStatus"] == "privacyStatusUnspecified"),
         } for i in playlist_items]
 
         if with_details:
