@@ -163,16 +163,16 @@
         "title": "Keelhauled",
         "channelName": "Alestorm - Topic",
         "channelId": "UCpmH4GvnC0AmPhrLUAKJyUg",
-        "id": "SoHGDQrhChA",
-        "publishedAt": "2024-11-13T08:11:24Z",
+        "id": "HBeCXN1kyNI",
+        "publishedAt": "2025-01-25T23:52:43Z",
         "songHash": "Alestorm - Keelhauled"
     },
     {
         "title": "Leviathan",
         "channelName": "Alestorm - Topic",
         "channelId": "UCpmH4GvnC0AmPhrLUAKJyUg",
-        "id": "mBTtkH7aPxw",
-        "publishedAt": "2024-11-15T01:25:15Z",
+        "id": "BrQbAUYjFYg",
+        "publishedAt": "2025-01-25T23:52:54Z",
         "songHash": "Alestorm - Leviathan"
     },
     {
@@ -1126,6 +1126,14 @@
         "id": "Td3U1CMq_pw",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Brocas Helm - Cry Of The Banshee"
+    },
+    {
+        "title": "Born in the U.S.A.",
+        "channelName": "Bruce Springsteen - Topic",
+        "channelId": "UCyFqJ_5TyAeTD7rHpLikbKQ",
+        "id": "tRx212PUa4g",
+        "publishedAt": "2025-01-20T08:47:56Z",
+        "songHash": "Bruce Springsteen - Born In The Usa"
     },
     {
         "title": "Soothsayer (Dedicated to Aunt Suzie)",
@@ -6456,6 +6464,14 @@
         "songHash": "Slayer - Disciple"
     },
     {
+        "title": "Abandoned, Pleased, Brainwashed, Exploited",
+        "channelName": "Sonata Arctica - Topic",
+        "channelId": "UCyGTmzFc3YzefTe8mOQ-QgA",
+        "id": "7NUh_cX6xU0",
+        "publishedAt": "2025-01-21T15:15:17Z",
+        "songHash": "Sonata Arctica - Abandoned Pleased Brainwashed Exploited"
+    },
+    {
         "title": "Black Sheep",
         "channelName": "Sonata Arctica - Topic",
         "channelId": "UCyGTmzFc3YzefTe8mOQ-QgA",
@@ -6464,12 +6480,44 @@
         "songHash": "Sonata Arctica - Black Sheep"
     },
     {
+        "title": "False News Travel Fast",
+        "channelName": "Sonata Arctica - Topic",
+        "channelId": "UCyGTmzFc3YzefTe8mOQ-QgA",
+        "id": "gepAIzfRyBs",
+        "publishedAt": "2025-01-21T14:16:18Z",
+        "songHash": "Sonata Arctica - False News Travel Fast"
+    },
+    {
         "title": "FullMoon",
         "channelName": "Sonata Arctica - Topic",
         "channelId": "UCyGTmzFc3YzefTe8mOQ-QgA",
         "id": "kymmZXYhovU",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Sonata Arctica - Fullmoon"
+    },
+    {
+        "title": "Replica",
+        "channelName": "Sonata Arctica - Topic",
+        "channelId": "UCyGTmzFc3YzefTe8mOQ-QgA",
+        "id": "qt7i9VGShZs",
+        "publishedAt": "2025-01-21T14:15:50Z",
+        "songHash": "Sonata Arctica - Replica"
+    },
+    {
+        "title": "Victoria's Secret",
+        "channelName": "Sonata Arctica - Topic",
+        "channelId": "UCyGTmzFc3YzefTe8mOQ-QgA",
+        "id": "JkhC-l3Eoc0",
+        "publishedAt": "2025-01-21T08:23:25Z",
+        "songHash": "Sonata Arctica - Victorias Secret"
+    },
+    {
+        "title": "We Built This City",
+        "channelName": "Starship - Topic",
+        "channelId": "UCx5EhC862RMB7_dOLBUCjAg",
+        "id": "BsCBGsKSW4g",
+        "publishedAt": "2025-01-17T15:31:38Z",
+        "songHash": "Starship - We Built This City"
     },
     {
         "title": "Steve Ouimette - The Devil Went Down to Georgia",
@@ -8296,6 +8344,14 @@
         "songHash": "Within Temptation - Fire And Ice"
     },
     {
+        "title": "Forgiven",
+        "channelName": "Within Temptation - Topic",
+        "channelId": "UCeWkbf3RIeKRs8THlxPlUUA",
+        "id": "1uVQj1aLcq8",
+        "publishedAt": "2025-01-24T09:30:39Z",
+        "songHash": "Within Temptation - Forgiven"
+    },
+    {
         "title": "Frozen",
         "channelName": "Within Temptation - Topic",
         "channelId": "UCeWkbf3RIeKRs8THlxPlUUA",
@@ -8432,12 +8488,28 @@
         "songHash": "Xandria - In Remembrance"
     },
     {
+        "title": "My Curse is My Redemption",
+        "channelName": "Xandria - Topic",
+        "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
+        "id": "MzN65kX-op8",
+        "publishedAt": "2025-01-24T08:40:41Z",
+        "songHash": "Xandria - My Curse Is My Redemption"
+    },
+    {
         "title": "Nightfall",
         "channelName": "Xandria - Topic",
         "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
         "id": "Btd0skPZqp8",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Xandria - Nightfall"
+    },
+    {
+        "title": "The Wonders Still Awaiting",
+        "channelName": "Xandria - Topic",
+        "channelId": "UCIhbtL1WkYSBCPpV8taCIXA",
+        "id": "Jh0_RpL-Hfw",
+        "publishedAt": "2025-01-25T04:38:17Z",
+        "songHash": "Xandria - The Wonders Still Awaiting"
     },
     {
         "title": "Universal",

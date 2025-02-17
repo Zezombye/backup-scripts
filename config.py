@@ -16,6 +16,7 @@ ytPlaylistsToDownload = [
     "PLDS8MSVtwiPYL6t48oRBhi53xqG3UBArU", #Tate motivation/insights
     "PLDS8MSVtwiPYFV57YlnPG1gpnH6u8Q-yX", #Good shit
     "PLDS8MSVtwiPbbkFXiGIxZAIO1_XQXt60g", #Music shitposts
+	"PLDS8MSVtwiPZT37BUdFbO07glh7ZXZqxY", #Relationships
 ]
 
 #Will only download the audio for these playlists
