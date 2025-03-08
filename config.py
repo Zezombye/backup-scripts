@@ -17,6 +17,12 @@ ytPlaylistsToDownload = [
     "PLDS8MSVtwiPYFV57YlnPG1gpnH6u8Q-yX", #Good shit
     "PLDS8MSVtwiPbbkFXiGIxZAIO1_XQXt60g", #Music shitposts
 	"PLDS8MSVtwiPZT37BUdFbO07glh7ZXZqxY", #Relationships
+    "PLDS8MSVtwiPYsuGaK8pGFmuF8gLK_yV4c", #Parenting
+    "PLDS8MSVtwiPbAJS4KbhIL0DEjEZoJVIMb", #Chess
+    "PLDS8MSVtwiPYCue38uxLKjuZ59f3Gc-DE", #Motivation
+    "PLDS8MSVtwiPbWERtwPmAi_esGDOioV2c3", #Social skills
+    "PLDS8MSVtwiPZTUdYnf8KQSWECqZ6EgAJn", #Boxing/MMA
+    "PLDS8MSVtwiPa-PmpT3aWGRyagMY3s-QE6", #MBTI/INTJ
 ]
 
 #Will only download the audio for these playlists

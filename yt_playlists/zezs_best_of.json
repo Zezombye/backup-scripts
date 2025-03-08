@@ -224,6 +224,14 @@
         "songHash": "Angel Witch - Angel Witch"
     },
     {
+        "title": "Phoenix Rising",
+        "channelName": "Annihilator - Topic",
+        "channelId": "UC1WbMJioQ-oDX6X2wxaB2oQ",
+        "id": "YQTeXBdPnIk",
+        "publishedAt": "2025-02-26T16:30:20Z",
+        "songHash": "Annihilator - Phoenix Rising"
+    },
+    {
         "title": "I Don't Care (US Version)",
         "channelName": "Apocalyptica - Topic",
         "channelId": "UCpqq5sZCFH6vkIrO9PZc8bA",
@@ -1894,6 +1902,14 @@
         "id": "FCGS84gb49U",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Edguy - Vain Glory Opera"
+    },
+    {
+        "title": "Elektronomia - Energy | Progressive House | NCS - Copyright Free Music",
+        "channelName": "NoCopyrightSounds",
+        "channelId": "UC_aEa8K-EOJ3D6gOs7HcyNg",
+        "id": "fzNMd3Tu1Zw",
+        "publishedAt": "2025-02-12T13:19:59Z",
+        "songHash": "Elektronomia - Energy Progressive House Ncs - Copyright Free Music"
     },
     {
         "title": "Elektronomia - Limitless | Progressive House | NCS - Copyright Free Music",
@@ -4640,6 +4656,38 @@
         "songHash": "Ozzy Osbourne - Mr Crowley"
     },
     {
+        "title": "Payday 2 Official Soundtrack - #09 Razormind",
+        "channelName": "CommanderCH",
+        "channelId": "UCqZrPK3ynJTtdp7VRZTsZKA",
+        "id": "YS7wn7Zu_As",
+        "publishedAt": "2025-02-12T13:14:45Z",
+        "songHash": "Payday 2 Official Soundtrack - 09 Razormind"
+    },
+    {
+        "title": "Payday 2 Official Soundtrack - #18 Wanted Dead Or Alive",
+        "channelName": "CommanderCH",
+        "channelId": "UCqZrPK3ynJTtdp7VRZTsZKA",
+        "id": "bamLz-zIAEg",
+        "publishedAt": "2025-02-12T13:14:55Z",
+        "songHash": "Payday 2 Official Soundtrack - 18 Wanted Dead Or Alive"
+    },
+    {
+        "title": "Payday 2 Official Soundtrack - #31 The Gauntlet",
+        "channelName": "CommanderCH",
+        "channelId": "UCqZrPK3ynJTtdp7VRZTsZKA",
+        "id": "EPhVCcHhqaI",
+        "publishedAt": "2025-02-12T13:16:21Z",
+        "songHash": "Payday 2 Official Soundtrack - 31 The Gauntlet"
+    },
+    {
+        "title": "Payday 2 Official Soundtrack - Death Row (Assault)",
+        "channelName": "CommanderCH",
+        "channelId": "UCqZrPK3ynJTtdp7VRZTsZKA",
+        "id": "0jEq8-YtFw8",
+        "publishedAt": "2025-02-12T13:11:31Z",
+        "songHash": "Payday 2 Official Soundtrack - Death Row"
+    },
+    {
         "title": "Ballintore Set",
         "channelName": "Pen of Chaos Et Le Naheulband - Topic",
         "channelId": "UCdDo85xJOUz5R_UVcUcVrYA",
@@ -5384,6 +5432,14 @@
         "songHash": "Rammstein - Zerstoren"
     },
     {
+        "title": "Red Alert 3 Theme - Soviet March",
+        "channelName": "James Hannigan - Topic",
+        "channelId": "UCKn4dQ-MvpneygNqeOUICng",
+        "id": "l_rbFhbcbT8",
+        "publishedAt": "2024-11-13T08:11:24Z",
+        "songHash": "Red Alert 3 Theme - Soviet March"
+    },
+    {
         "title": "Dosed",
         "channelName": "Red Hot Chili Peppers - Topic",
         "channelId": "UCrSorX845CEWXzU4Z7BojjA",
@@ -5406,14 +5462,6 @@
         "id": "g7GMIQV8hoA",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Reinxeed Viva Forever"
-    },
-    {
-        "title": "Red Alert 3 Theme - Soviet March",
-        "channelName": "Release - Topic",
-        "channelId": "UCDb6KtRSjkQseNOgag79SDA",
-        "id": "l_rbFhbcbT8",
-        "publishedAt": "2024-11-13T08:11:24Z",
-        "songHash": "Release - Red Alert 3 Theme - Soviet March"
     },
     {
         "title": "Losing My Religion",
@@ -6190,6 +6238,14 @@
         "id": "KUoDPJaiyfs",
         "publishedAt": "2024-11-17T04:28:52Z",
         "songHash": "Silent Knight - The Final Countdown"
+    },
+    {
+        "title": "Simon Viklund – Break the Rules (lyrics)",
+        "channelName": "splish",
+        "channelId": "UC6Z4K_QenJ10F_BpgdzkVWg",
+        "id": "p4Z96WwZrL0",
+        "publishedAt": "2025-02-12T13:19:44Z",
+        "songHash": "Simon Viklund Break The Rules"
     },
     {
         "title": "Anywhere Else But Here",
@@ -8211,8 +8267,8 @@
         "title": "We're Not Gonna Take It",
         "channelName": "Twisted Sister - Topic",
         "channelId": "UC8-GQfF2Xod92t8kiUe2ajA",
-        "id": "ZqOp76R12DM",
-        "publishedAt": "2024-11-13T08:11:24Z",
+        "id": "PqQdbevaB-Q",
+        "publishedAt": "2025-02-17T00:30:50Z",
         "songHash": "Twisted Sister - Were Not Gonna Take It"
     },
     {

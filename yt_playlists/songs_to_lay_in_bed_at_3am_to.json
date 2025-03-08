@@ -16,6 +16,14 @@
         "songHash": "Amaranthe - Amaranthine"
     },
     {
+        "title": "Phoenix Rising",
+        "channelName": "Annihilator - Topic",
+        "channelId": "UC1WbMJioQ-oDX6X2wxaB2oQ",
+        "id": "YQTeXBdPnIk",
+        "publishedAt": "2025-02-26T16:30:22Z",
+        "songHash": "Annihilator - Phoenix Rising"
+    },
+    {
         "title": "I Don't Care (US Version)",
         "channelName": "Apocalyptica - Topic",
         "channelId": "UCpqq5sZCFH6vkIrO9PZc8bA",
@@ -190,14 +198,6 @@
         "id": "WblsOt-r1zw",
         "publishedAt": "2024-12-08T20:01:02Z",
         "songHash": "Beast In Black - Ghost In The Rain"
-    },
-    {
-        "title": "Moonlight Rendezvous",
-        "channelName": "Beast in Black - Topic",
-        "channelId": "UCZ6oHxEMKXlnjCzs_Ae55oA",
-        "id": "9j5NC5m-kUU",
-        "publishedAt": "2024-12-08T20:01:13Z",
-        "songHash": "Beast In Black - Moonlight Rendezvous"
     },
     {
         "title": "Oceandeep",
@@ -614,14 +614,6 @@
         "id": "yOuDBmsHeFA",
         "publishedAt": "2024-12-08T20:19:05Z",
         "songHash": "Five Finger Death Punch - I Refuse"
-    },
-    {
-        "title": "Question Everything",
-        "channelName": "Five Finger Death Punch - Topic",
-        "channelId": "UC1P-VkqYRRNUxSeWkIUsYGA",
-        "id": "7WjF0zl8L3k",
-        "publishedAt": "2024-12-08T20:19:16Z",
-        "songHash": "Five Finger Death Punch - Question Everything"
     },
     {
         "title": "Remember Everything",

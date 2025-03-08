@@ -85,6 +85,7 @@ class Youtube():
         #Special cases
         specialCases = {
             "or7GVQ9R-Lc": "Steve Ouimette - Lous Revenge",
+            "l_rbFhbcbT8": "Red Alert 3 Theme - Soviet March",
         }
         if video["id"] in specialCases:
             title = self.normalize(specialCases[video["id"]])
