@@ -352,11 +352,11 @@
         "songHash": "Austin Jons And The Immortals - Techno Syndrome"
     },
     {
-        "title": "Shelter from the Rain (feat. Michael Kiske, Bob Catley, Henjo Richter, Kai Hansen)",
+        "title": "Shelter From The Rain",
         "channelName": "Avantasia - Topic",
         "channelId": "UCoo3R3_6QAn0cXTkgaM-QKQ",
-        "id": "nvrxwnz070c",
-        "publishedAt": "2024-11-17T04:24:52Z",
+        "id": "8BLR2onLBko",
+        "publishedAt": "2025-04-01T04:09:15Z",
         "songHash": "Avantasia - Shelter From The Rain"
     },
     {
@@ -1854,6 +1854,14 @@
         "id": "iYcbfc_UB6M",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Drowning Pool - Bodies"
+    },
+    {
+        "title": "Hotel California (2013 Remaster)",
+        "channelName": "Eagles - Topic",
+        "channelId": "UC49r4GNHHpc-eQ9hmD2Rg6A",
+        "id": "BciS5krYL80",
+        "publishedAt": "2024-11-15T02:05:38Z",
+        "songHash": "Eagles - Hotel California"
     },
     {
         "title": "It's a Sin",
@@ -3387,8 +3395,8 @@
         "title": "Infinite Ammo",
         "channelName": "Le Castle Vania - Topic",
         "channelId": "UCaBt14IgRdZEUiER-u3qScw",
-        "id": "yuBVGTzsBiU",
-        "publishedAt": "2024-11-28T08:17:56Z",
+        "id": "q_NOGb47eSU",
+        "publishedAt": "2025-04-01T04:09:36Z",
         "songHash": "Le Castle Vania - Infinite Ammo"
     },
     {
@@ -6088,6 +6096,22 @@
         "songHash": "Sabaton - Wolfpack"
     },
     {
+        "title": "Solomon's Dance",
+        "channelName": "Saidian - Topic",
+        "channelId": "UCw09BbtTyvC6yDu925GJaDg",
+        "id": "5jIZ1TYMHmk",
+        "publishedAt": "2025-03-20T15:09:39Z",
+        "songHash": "Saidian - Solomons Dance"
+    },
+    {
+        "title": "The Princess",
+        "channelName": "Saidian - Topic",
+        "channelId": "UCw09BbtTyvC6yDu925GJaDg",
+        "id": "OotDDzkLcRc",
+        "publishedAt": "2025-03-09T07:13:10Z",
+        "songHash": "Saidian - The Princess"
+    },
+    {
         "title": "I Want You",
         "channelName": "Savage Garden - Topic",
         "channelId": "UC-qlHYRduN5fldggOFzp1mw",
@@ -7048,6 +7072,14 @@
         "songHash": "Symphonity - Bring Us The Light"
     },
     {
+        "title": "Evening Star",
+        "channelName": "Symphonity - Topic",
+        "channelId": "UC9L5WzCQe1ugSbYRsPTkupg",
+        "id": "-GX5wCyCboc",
+        "publishedAt": "2025-03-31T09:33:09Z",
+        "songHash": "Symphonity - Evening Star"
+    },
+    {
         "title": "Lonely Day",
         "channelName": "System Of A Down - Topic",
         "channelId": "UCDJftX2zx_UT_QSnBGIF96w",
@@ -7102,14 +7134,6 @@
         "id": "yGxHDmHoqXc",
         "publishedAt": "2024-11-14T01:50:53Z",
         "songHash": "The Cranberries - Zombie"
-    },
-    {
-        "title": "Hotel California (2013 Remaster)",
-        "channelName": "The Eagles - Topic",
-        "channelId": "UC49r4GNHHpc-eQ9hmD2Rg6A",
-        "id": "BciS5krYL80",
-        "publishedAt": "2024-11-15T02:05:38Z",
-        "songHash": "The Eagles - Hotel California"
     },
     {
         "title": "Mr. Brightside",
