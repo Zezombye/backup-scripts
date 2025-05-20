@@ -152,7 +152,7 @@
         "songHash": "Alestorm - Drink"
     },
     {
-        "title": "Hangover (Taio Cruz Cover)",
+        "title": "Hangover",
         "channelName": "Alestorm - Topic",
         "channelId": "UCpmH4GvnC0AmPhrLUAKJyUg",
         "id": "6YiqTMrnqng",
@@ -190,6 +190,14 @@
         "id": "qOVeGz8pMSs",
         "publishedAt": "2024-11-15T01:24:33Z",
         "songHash": "Alestorm - Shipwrecked"
+    },
+    {
+        "title": "Poison",
+        "channelName": "Alice Cooper - Topic",
+        "channelId": "UCSjn-oQV136VoKk7FXxxZ0w",
+        "id": "XUhjIoDC7Pg",
+        "publishedAt": "2025-05-13T00:22:15Z",
+        "songHash": "Alice Cooper - Poison"
     },
     {
         "title": "Amaranthine",
@@ -328,12 +336,36 @@
         "songHash": "Arachnes - Just Try And Hit Me"
     },
     {
+        "title": "Fallen Angel",
+        "channelName": "At Vance - Topic",
+        "channelId": "UCunSqRntuwll6L1fOONNDPQ",
+        "id": "aJru1vQyilY",
+        "publishedAt": "2025-04-30T04:52:54Z",
+        "songHash": "At Vance - Fallen Angel"
+    },
+    {
+        "title": "Logical Song",
+        "channelName": "At Vance - Topic",
+        "channelId": "UCunSqRntuwll6L1fOONNDPQ",
+        "id": "3Gq_-hhwatM",
+        "publishedAt": "2025-05-15T07:12:28Z",
+        "songHash": "At Vance - Logical Song"
+    },
+    {
         "title": "Only Human",
         "channelName": "At Vance - Topic",
         "channelId": "UCunSqRntuwll6L1fOONNDPQ",
         "id": "H5naciPpjvk",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "At Vance - Only Human"
+    },
+    {
+        "title": "The Winner Takes It All",
+        "channelName": "At Vance - Topic",
+        "channelId": "UCunSqRntuwll6L1fOONNDPQ",
+        "id": "xpphPS0SLAU",
+        "publishedAt": "2025-04-17T06:01:11Z",
+        "songHash": "At Vance - The Winner Takes It All"
     },
     {
         "title": "Witches Dance",
@@ -696,6 +728,14 @@
         "songHash": "Beast In Black - End Of The World"
     },
     {
+        "title": "Enter The Behelit",
+        "channelName": "Beast in Black - Topic",
+        "channelId": "UCZ6oHxEMKXlnjCzs_Ae55oA",
+        "id": "5U-Hb65mJGk",
+        "publishedAt": "2025-05-10T08:59:35Z",
+        "songHash": "Beast In Black - Enter The Behelit"
+    },
+    {
         "title": "Eternal Fire",
         "channelName": "Beast in Black - Topic",
         "channelId": "UCZ6oHxEMKXlnjCzs_Ae55oA",
@@ -862,6 +902,14 @@
         "id": "Wnn6M1nNiKQ",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Black Eyed Peas - I Gotta Feeling"
+    },
+    {
+        "title": "Nosferatu",
+        "channelName": "Bloodbound - Topic",
+        "channelId": "UCMdFBg2b49RBAUr5XZxkArA",
+        "id": "4QPxQU8k670",
+        "publishedAt": "2025-05-15T11:38:08Z",
+        "songHash": "Bloodbound - Nosferatu"
     },
     {
         "title": "Born To Be My Baby",
@@ -1208,11 +1256,11 @@
         "songHash": "Chuck Berry - Johnny B Goode"
     },
     {
-        "title": "Tubthumping (Radio Edit)",
-        "channelName": "Chumbawamba - Topic",
-        "channelId": "UCmhCi61qcB0Pygs91fbtw1Q",
-        "id": "buFDQXI7nOk",
-        "publishedAt": "2024-11-17T05:37:03Z",
+        "title": "Chumbawamba - Tubthumping (Lyrics HD)",
+        "channelName": "Song Lyrics HD",
+        "channelId": "UCxovBZisGUco3LvuoB_otvw",
+        "id": "1Vz56Od00Ns",
+        "publishedAt": "2025-05-18T10:07:39Z",
         "songHash": "Chumbawamba - Tubthumping"
     },
     {
@@ -1944,7 +1992,7 @@
         "songHash": "Elton John - Im Still Standing"
     },
     {
-        "title": "Saturday Night’s Alright (For Fighting) (Remastered 2014)",
+        "title": "Saturday Night’s Alright (For Fighting)",
         "channelName": "Elton John - Topic",
         "channelId": "UCn9i4cdLe14CbsOycTbKMoA",
         "id": "AhnZEmnuzgM",
@@ -1982,6 +2030,14 @@
         "id": "FtrLo1265PU",
         "publishedAt": "2024-11-17T09:23:13Z",
         "songHash": "Erock - Moonlight Sonata Meets Metal"
+    },
+    {
+        "title": "Afterlife (from the Netflix Series \"Devil May Cry\")",
+        "channelName": "Evanescence - Topic",
+        "channelId": "UC1ObIyFsDJn62iAZYLWcNxA",
+        "id": "fLc4FbhLqgE",
+        "publishedAt": "2025-04-11T20:36:00Z",
+        "songHash": "Evanescence - Afterlife"
     },
     {
         "title": "Bring Me To Life",
@@ -2078,6 +2134,22 @@
         "id": "Qt298P1kL8E",
         "publishedAt": "2024-11-17T08:53:45Z",
         "songHash": "Evanescence - Whisper"
+    },
+    {
+        "title": "Dying in my Dreams",
+        "channelName": "Exit Eden - Topic",
+        "channelId": "UCHwyXpbJGCEX70GH4HDBLEw",
+        "id": "S_K4On_4sKs",
+        "publishedAt": "2025-05-15T05:39:30Z",
+        "songHash": "Exit Eden - Dying In My Dreams"
+    },
+    {
+        "title": "Poison",
+        "channelName": "Exit Eden - Topic",
+        "channelId": "UCHwyXpbJGCEX70GH4HDBLEw",
+        "id": "p9ByLQSEf6c",
+        "publishedAt": "2025-05-13T00:21:53Z",
+        "songHash": "Exit Eden - Poison"
     },
     {
         "title": "Fallout: New Vegas - I'm So Blue - Katie Thompson",
@@ -2358,6 +2430,14 @@
         "id": "OqEZPdmevhc",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Godsmack - I Stand Alone"
+    },
+    {
+        "title": "Goodbye",
+        "channelName": "Grave Digger - Topic",
+        "channelId": "UCo8IuNkx9PS8MswirsKtZpQ",
+        "id": "7p8U6APuxCc",
+        "publishedAt": "2025-04-15T00:27:31Z",
+        "songHash": "Grave Digger - Goodbye"
     },
     {
         "title": "21 Guns",
@@ -2928,6 +3008,30 @@
         "songHash": "Holyhell - The Fall"
     },
     {
+        "title": "Holyhell Revelations (lyrics)",
+        "channelName": "Евгений Горбань",
+        "channelId": "UCKVCVPGOiLJww4cuw-oUgfw",
+        "id": "ywtt_eaZQeg",
+        "publishedAt": "2025-04-16T06:25:16Z",
+        "songHash": "Holyhell Revelations"
+    },
+    {
+        "title": "Holyhell- Wings of Light",
+        "channelName": "32death32",
+        "channelId": "UCuH6GtKehEHaheDHApjI6iA",
+        "id": "SrmSTJYWiBs",
+        "publishedAt": "2025-04-23T11:28:08Z",
+        "songHash": "Holyhell- Wings Of Light"
+    },
+    {
+        "title": "holyhell-apocalypse",
+        "channelName": "wolfkai26",
+        "channelId": "UCbx7avQ9Vi45_aYQV7-Ao9A",
+        "id": "xfxue_zMb7A",
+        "publishedAt": "2025-04-21T13:59:10Z",
+        "songHash": "Holyhell-Apocalypse"
+    },
+    {
         "title": "The Reason",
         "channelName": "Hoobastank - Topic",
         "channelId": "UCApYZt0aLG30DTt0g4yKLmw",
@@ -2950,6 +3054,14 @@
         "id": "FrVNEgY4JSw",
         "publishedAt": "2024-11-17T04:24:34Z",
         "songHash": "Insania - Gift Of Life"
+    },
+    {
+        "title": "Heavenly Hell",
+        "channelName": "Instanzia - Topic",
+        "channelId": "UCX8AsvvtKESRxhcmTzodF0w",
+        "id": "mSZRyCNucKw",
+        "publishedAt": "2025-04-14T22:49:35Z",
+        "songHash": "Instanzia - Heavenly Hell"
     },
     {
         "title": "2 Minutes to Midnight (2015 Remaster)",
@@ -3696,11 +3808,11 @@
         "songHash": "Lost Horizon - Highlander"
     },
     {
-        "title": "The Power of Love",
+        "title": "The Power Of Love",
         "channelName": "Lunatica - Topic",
         "channelId": "UCJlPA0xbreu0MxI15SUtKyA",
-        "id": "jUjso3vrlXI",
-        "publishedAt": "2024-11-24T16:36:38Z",
+        "id": "Ujwvi1RGcKw",
+        "publishedAt": "2025-05-18T10:08:07Z",
         "songHash": "Lunatica - The Power Of Love"
     },
     {
@@ -4984,6 +5096,14 @@
         "songHash": "Powerwolf - Panic In The Pentagram"
     },
     {
+        "title": "Poison",
+        "channelName": "Powerwolf - Topic",
+        "channelId": "UC9LO_ioQYQay7CrsbacNqBQ",
+        "id": "dRZSghDU23Q",
+        "publishedAt": "2025-05-10T10:09:56Z",
+        "songHash": "Powerwolf - Poison"
+    },
+    {
         "title": "Power and Glory",
         "channelName": "Powerwolf - Topic",
         "channelId": "UC9LO_ioQYQay7CrsbacNqBQ",
@@ -4992,7 +5112,7 @@
         "songHash": "Powerwolf - Power And Glory"
     },
     {
-        "title": "Prayer In The Dark",
+        "title": "Prayer in the Dark",
         "channelName": "Powerwolf - Topic",
         "channelId": "UC9LO_ioQYQay7CrsbacNqBQ",
         "id": "mygE-wqAp6E",
@@ -5072,7 +5192,7 @@
         "songHash": "Powerwolf - We Drink Your Blood"
     },
     {
-        "title": "When The Moon Shines Red",
+        "title": "When the Moon Shines Red",
         "channelName": "Powerwolf - Topic",
         "channelId": "UC9LO_ioQYQay7CrsbacNqBQ",
         "id": "tlYU8mxXGnY",
@@ -5440,6 +5560,14 @@
         "songHash": "Rammstein - Zerstoren"
     },
     {
+        "title": "Ravenheart - Fly Away",
+        "channelName": "Egem Muti",
+        "channelId": "UCzop6yniUpZiWEeuS-5fJcg",
+        "id": "dzupLcBJOTk",
+        "publishedAt": "2025-04-14T23:53:27Z",
+        "songHash": "Ravenheart - Fly Away"
+    },
+    {
         "title": "Red Alert 3 Theme - Soviet March",
         "channelName": "James Hannigan - Topic",
         "channelId": "UCKn4dQ-MvpneygNqeOUICng",
@@ -5478,6 +5606,14 @@
         "id": "Efa6BAWPm9o",
         "publishedAt": "2024-11-13T08:11:24Z",
         "songHash": "Rem - Losing My Religion"
+    },
+    {
+        "title": "Reptilian - Change your Heart",
+        "channelName": "Ragnarnedo Rioxa",
+        "channelId": "UC2X0sejxYhakA0spzcvv-mQ",
+        "id": "fkFtLvzXk-w",
+        "publishedAt": "2025-04-14T23:44:36Z",
+        "songHash": "Reptilian - Change Your Heart"
     },
     {
         "title": "RIOT - Overkill but without the 40 second long end",
@@ -5960,6 +6096,14 @@
         "songHash": "Sabaton - Stormtroopers"
     },
     {
+        "title": "Templars",
+        "channelName": "Sabaton - Topic",
+        "channelId": "UCxJrBLPnyUIt6K33m9ZcsqA",
+        "id": "0_5jeGAmRjE",
+        "publishedAt": "2025-04-25T14:43:27Z",
+        "songHash": "Sabaton - Templars"
+    },
+    {
         "title": "The Art of War",
         "channelName": "Sabaton - Topic",
         "channelId": "UCxJrBLPnyUIt6K33m9ZcsqA",
@@ -6110,6 +6254,14 @@
         "id": "OotDDzkLcRc",
         "publishedAt": "2025-03-09T07:13:10Z",
         "songHash": "Saidian - The Princess"
+    },
+    {
+        "title": "Beyond Reality",
+        "channelName": "Savage Circus - Topic",
+        "channelId": "UC4qdIPfr6A4V4nXYrOOxdcQ",
+        "id": "R97CwyR9q_k",
+        "publishedAt": "2025-04-14T23:36:41Z",
+        "songHash": "Savage Circus - Beyond Reality"
     },
     {
         "title": "I Want You",
@@ -6272,7 +6424,7 @@
         "songHash": "Simon Viklund Break The Rules"
     },
     {
-        "title": "Anywhere Else But Here",
+        "title": "Anywhere Else but Here",
         "channelName": "Simple Plan - Topic",
         "channelId": "UCKqSOWLnqdSAOQvoEwvrWWg",
         "id": "wQVo_JjZFxw",
@@ -6440,7 +6592,7 @@
         "songHash": "Skillet - Awake And Alive"
     },
     {
-        "title": "Back From the Dead",
+        "title": "Back from the Dead",
         "channelName": "Skillet - Topic",
         "channelId": "UCUHYrf3BF5yI9QdRw09__BA",
         "id": "dGawgRPqr5Q",
@@ -8288,6 +8440,14 @@
         "songHash": "Turisas - Rasputin"
     },
     {
+        "title": "Blade",
+        "channelName": "Twins Crew - Topic",
+        "channelId": "UCdGczRK241_41GkQ3EJ8NpA",
+        "id": "IF65eUGb4G4",
+        "publishedAt": "2025-04-14T23:29:37Z",
+        "songHash": "Twins Crew - Blade"
+    },
+    {
         "title": "We're Not Gonna Take It",
         "channelName": "Twisted Sister - Topic",
         "channelId": "UC8-GQfF2Xod92t8kiUe2ajA",
@@ -8374,6 +8534,14 @@
         "id": "UV8TkLJlFYA",
         "publishedAt": "2024-11-17T09:21:58Z",
         "songHash": "Vivaldi - Four Seasons"
+    },
+    {
+        "title": "Godless Run",
+        "channelName": "W.A.S.P. - Topic",
+        "channelId": "UCctxEm07OfzGTFp9DftBeyg",
+        "id": "d5FImmbhCpQ",
+        "publishedAt": "2025-04-15T00:19:54Z",
+        "songHash": "Wasp - Godless Run"
     },
     {
         "title": "Diggy Diggy Hole",

@@ -584,6 +584,14 @@
         "songHash": "Evanescence - Whisper"
     },
     {
+        "title": "Dying in my Dreams",
+        "channelName": "Exit Eden - Topic",
+        "channelId": "UCHwyXpbJGCEX70GH4HDBLEw",
+        "id": "S_K4On_4sKs",
+        "publishedAt": "2025-05-15T05:39:32Z",
+        "songHash": "Exit Eden - Dying In My Dreams"
+    },
+    {
         "title": "Fallout: New Vegas - I'm So Blue - Katie Thompson",
         "channelName": "P2T2",
         "channelId": "UCERY_hQ_W1682vXjfNd6JUA",
@@ -678,6 +686,14 @@
         "id": "iVWeky0WPbU",
         "publishedAt": "2024-12-08T20:20:48Z",
         "songHash": "Ghost - Spillways"
+    },
+    {
+        "title": "Goodbye",
+        "channelName": "Grave Digger - Topic",
+        "channelId": "UCo8IuNkx9PS8MswirsKtZpQ",
+        "id": "7p8U6APuxCc",
+        "publishedAt": "2025-04-15T00:27:44Z",
+        "songHash": "Grave Digger - Goodbye"
     },
     {
         "title": "Wake Me up When September Ends",
@@ -1112,11 +1128,11 @@
         "songHash": "Lost Horizon - Highlander"
     },
     {
-        "title": "The Power of Love",
+        "title": "The Power Of Love",
         "channelName": "Lunatica - Topic",
         "channelId": "UCJlPA0xbreu0MxI15SUtKyA",
-        "id": "jUjso3vrlXI",
-        "publishedAt": "2024-12-08T20:31:25Z",
+        "id": "Ujwvi1RGcKw",
+        "publishedAt": "2025-05-18T10:08:14Z",
         "songHash": "Lunatica - The Power Of Love"
     },
     {
@@ -1534,6 +1550,14 @@
         "id": "7Rd5ltFFQDI",
         "publishedAt": "2024-12-08T20:43:31Z",
         "songHash": "Rammstein - Wo Bist Du"
+    },
+    {
+        "title": "Ravenheart - Fly Away",
+        "channelName": "Egem Muti",
+        "channelId": "UCzop6yniUpZiWEeuS-5fJcg",
+        "id": "dzupLcBJOTk",
+        "publishedAt": "2025-04-18T13:53:51Z",
+        "songHash": "Ravenheart - Fly Away"
     },
     {
         "title": "Dosed",
