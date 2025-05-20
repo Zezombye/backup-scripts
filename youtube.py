@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import base64
+import datetime
 import os
 import json
 import subprocess
@@ -11,6 +13,7 @@ import googleapiclient.discovery
 from google_auth_oauthlib.flow import InstalledAppFlow
 from collections import defaultdict
 import google.oauth2
+import requests
 import utils
 import config
 
@@ -30,6 +33,33 @@ class Youtube():
         self.BACKUP_DIR = config.BACKUP_DIR+"/youtube/"
         self.REGION_CODE = "FR"
 
+        self.session = requests.session()
+        self.session.headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0",
+        }
+        #Initialize the session to bypass the consent popup
+        r = self.session.get("https://music.youtube.com", allow_redirects=True)
+        if not r.ok:
+            raise ValueError("Could not initialize session: %s, %s" % (r.status_code, r.text))
+        #print(r.url)
+        if r.url.startswith("https://consent.youtube.com"):
+            #print("Got consent page, trying to bypass...")
+            r = self.session.post("https://consent.youtube.com/save", data={
+                "continue": "https://music.youtube.com",
+                "gl": self.REGION_CODE,
+                "m": "0",
+                "app": "0",
+                "pc": "ytm",
+                "x": "6",
+                "bl": "boq_identityfrontenduiserver_"+time.strftime("%Y%m%d")+".07_p0",
+                "hl": self.REGION_CODE,
+                "src": "1",
+                "cm": "2",
+                "set_eom": "true",
+            })
+            if not r.ok:
+                raise ValueError("Could not bypass consent page: %s, %s" % (r.status_code, r.text))
+
 
     def normalize(self, text):
 
@@ -48,7 +78,7 @@ class Youtube():
         #"Artist: song" -> "Artist - song"
         #We don't care if it also affects the title, it leads to better sorting
         text = re.sub(r':', ' - ', text)
-        # Replace punctuation with spaces
+        # Replace punctuation (except dashes) with spaces
         text = re.sub(r'[^\w\s-]', ' ', text)
 
         # Replace multiple spaces with a single space and trim
@@ -91,6 +121,21 @@ class Youtube():
             title = self.normalize(specialCases[video["id"]])
 
         return title.title()
+
+
+    def convertVideoPlaylistItemObject(self, video):
+        return {
+            "publishedAt": video["snippet"]["publishedAt"],
+            "title": video["snippet"]["title"],
+            "description": video["snippet"]["description"],
+            "channelName": video["snippet"].get("videoOwnerChannelTitle") or "null",
+            "channelId": video["snippet"].get("videoOwnerChannelId") or "null",
+            "id": video["snippet"]["resourceId"]["videoId"],
+            "playlistitem_id": video["id"],
+            "position": video["snippet"]["position"],
+            "isAvailable": not(video["snippet"]["title"] == "Private video" and video["status"]["privacyStatus"] == "private") and not (video["snippet"]["title"] == "Deleted video" and video["status"]["privacyStatus"] == "privacyStatusUnspecified"),
+        }
+
 
     def get_playlist_info(self, playlistId):
         print("Getting info of playlist '%s'" % (playlistId))
@@ -138,17 +183,7 @@ class Youtube():
         with open("debug/yt_playlist.json", "w+", encoding="utf-8") as f:
             f.write(json.dumps(playlist_items, indent=4, ensure_ascii=False))
 
-        videos = [{
-            "publishedAt": i["snippet"]["publishedAt"],
-            "title": i["snippet"]["title"],
-            "description": i["snippet"]["description"],
-            "channelName": i["snippet"].get("videoOwnerChannelTitle") or "null",
-            "channelId": i["snippet"].get("videoOwnerChannelId") or "null",
-            "id": i["snippet"]["resourceId"]["videoId"],
-            "playlistitem_id": i["id"],
-            "position": i["snippet"]["position"],
-            "isAvailable": not(i["snippet"]["title"] == "Private video" and i["status"]["privacyStatus"] == "private") and not (i["snippet"]["title"] == "Deleted video" and i["status"]["privacyStatus"] == "privacyStatusUnspecified"),
-        } for i in playlist_items]
+        videos = [self.convertVideoPlaylistItemObject(i) for i in playlist_items]
 
         if with_details:
             print("Fetching video details")
@@ -331,8 +366,48 @@ class Youtube():
     def delete_playlist_item(self, playlistItemId):
         self.ytApiClient.playlistItems().delete(id=playlistItemId).execute()
 
+    def add_video_to_playlist(self, playlistId, videoId, index):
+        r = self.ytApiClient.playlistItems().insert(
+            part="snippet,contentDetails,status,id",
+            body={
+                "snippet": {
+                    "playlistId": playlistId,
+                    "position": index,
+                    "resourceId": {
+                        "kind": "youtube#video",
+                        "videoId": videoId
+                    }
+                }
+            }
+        ).execute()
+
+        return self.convertVideoPlaylistItemObject(r)
+
+
+    def get_new_video_id(self, videoId):
+        #Autogenerated music videos frequently change their id.
+        #We can get the new id via music.youtube.com
+        r = self.session.get("https://music.youtube.com/embed/watch?v="+videoId+"&cbrd=1")
+        #print(r.request.headers)
+        #print(r.url)
+        #print(r.headers)
+        #print(r.cookies.items())
+        if not r.ok:
+            raise ValueError("Could not get new video id for '%s': %s, %s" % (videoId, r.status_code, r.text))
+
+        with open("debug/yt_music.html", "w+", encoding="utf-8") as f:
+            f.write(r.text)
+
+        newId = re.search(r'\\"watchEndpoint\\":\{\\"videoId\\":\\"([A-Za-z0-9_-]{11})\\"', r.text)
+        if not newId:
+            raise ValueError("Could not find new video id for '%s'" % (videoId))
+
+        return newId.group(1)
+
 
     def main(self):
+
+
 
         return
 
@@ -366,6 +441,6 @@ class Youtube():
 
 if __name__ == "__main__":
     youtube = Youtube()
-    youtube.download_video("1UhCACcsWHQ", "D:/bkp/youtube/", 12, audioOnly=True)
-    youtube.download_video("pJvduG0E628", "D:/bkp/youtube/", 12, audioOnly=True)
+    print(youtube.get_new_video_id("jUjso3vrlXI"))
+    print(youtube.add_video_to_playlist("PLDS8MSVtwiPZ53t18Oae17V71yCPffK9r", "M7FIvfx5J10", 5))
     #youtube.main()

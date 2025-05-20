@@ -5,10 +5,23 @@ BACKUP_DIR = "D:/bkp/"
 
 WL_ID = "PLK5yrmOBPizjuP7IUTU3HcCo3YJ3L96Dz" #I guess useful in case I want to sort it or something
 
-#Those playlists will be sorted according to song hash, and checked for unavailable videos as well as duplicates
+#Those playlists will be sorted according to song hash (except if in ytMusicPlaylistsToNotSort), and checked for unavailable videos as well as duplicates
 ytMusicPlaylists = [
+    "PLDS8MSVtwiPZ53t18Oae17V71yCPffK9r", #Romantic mixtape
     "PLDS8MSVtwiPYVvz3D43_gWJGfXKv8ZTxg", #Best of music
     "PLDS8MSVtwiPZMhCA6ABpJCVBWCY4WcKw3", #Ballads & soft songs
+    "PLDS8MSVtwiPZ0QHhxgNaoAPCTgXL4aYfQ", #Best of albums
+]
+ytMusicPlaylistsToNotSort = [
+    "PLDS8MSVtwiPZ53t18Oae17V71yCPffK9r", #Romantic mixtape
+]
+
+#Will only download the audio for these playlists, and try to fix missing songs
+ytMusicPlaylistsToDownload = [
+    "PLDS8MSVtwiPYVvz3D43_gWJGfXKv8ZTxg", #Best of music
+    "PLDS8MSVtwiPZMhCA6ABpJCVBWCY4WcKw3", #Ballads & soft songs
+    "PLDS8MSVtwiPb-BwwJ7_krnU-O-yUH7uTA", #War mixtape
+    "PLDS8MSVtwiPZ53t18Oae17V71yCPffK9r", #Romantic mixtape
     "PLDS8MSVtwiPZ0QHhxgNaoAPCTgXL4aYfQ", #Best of albums
 ]
 
@@ -23,13 +36,6 @@ ytPlaylistsToDownload = [
     "PLDS8MSVtwiPbWERtwPmAi_esGDOioV2c3", #Social skills
     "PLDS8MSVtwiPZTUdYnf8KQSWECqZ6EgAJn", #Boxing/MMA
     "PLDS8MSVtwiPa-PmpT3aWGRyagMY3s-QE6", #MBTI/INTJ
-]
-
-#Will only download the audio for these playlists
-ytMusicPlaylistsToDownload = [
-    "PLDS8MSVtwiPYVvz3D43_gWJGfXKv8ZTxg", #Best of music
-    "PLDS8MSVtwiPZMhCA6ABpJCVBWCY4WcKw3", #Ballads & soft songs
-    "PLDS8MSVtwiPb-BwwJ7_krnU-O-yUH7uTA", #War mixtape
-    "PLDS8MSVtwiPZ53t18Oae17V71yCPffK9r", #Romantic mixtape
-    "PLDS8MSVtwiPZ0QHhxgNaoAPCTgXL4aYfQ", #Best of albums
+    "PLDS8MSVtwiPaBCQg5iwtMJzbxz7KYjTuw", #Graphic/web design
+    "PLDS8MSVtwiPYS0o6qCLC6UBOkagU4Jmn1", #Fitness
 ]
