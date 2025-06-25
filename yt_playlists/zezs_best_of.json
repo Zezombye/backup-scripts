@@ -1344,6 +1344,14 @@
         "songHash": "Daniel Tidwell - At Dooms Gate"
     },
     {
+        "title": "Alea Jacta",
+        "channelName": "Dark Moor - Topic",
+        "channelId": "UCuQSIVgxWjA-AdqHfJ-LHlw",
+        "id": "0Nl_-d1YA9U",
+        "publishedAt": "2025-06-03T21:15:59Z",
+        "songHash": "Dark Moor - Alea Jacta"
+    },
+    {
         "title": "The Star",
         "channelName": "Dark Moor - Topic",
         "channelId": "UCuQSIVgxWjA-AdqHfJ-LHlw",
@@ -2152,6 +2160,14 @@
         "songHash": "Exit Eden - Poison"
     },
     {
+        "title": "Total Eclipse of the Heart",
+        "channelName": "Exit Eden - Topic",
+        "channelId": "UCHwyXpbJGCEX70GH4HDBLEw",
+        "id": "Yxd07IgVXIw",
+        "publishedAt": "2025-05-23T13:44:44Z",
+        "songHash": "Exit Eden - Total Eclipse Of The Heart"
+    },
+    {
         "title": "Fallout: New Vegas - I'm So Blue - Katie Thompson",
         "channelName": "P2T2",
         "channelId": "UCERY_hQ_W1682vXjfNd6JUA",
@@ -2326,6 +2342,14 @@
         "id": "rnO-MflYxCw",
         "publishedAt": "2024-11-15T01:38:59Z",
         "songHash": "Foster The People - Pumped Up Kicks"
+    },
+    {
+        "title": "Fail No More",
+        "channelName": "Frozen Crown - Topic",
+        "channelId": "UCGjaitth3Yy5Hd1bVq35gYw",
+        "id": "_P_fAPX1EmM",
+        "publishedAt": "2025-06-04T22:27:59Z",
+        "songHash": "Frozen Crown - Fail No More"
     },
     {
         "title": "It's a Sin",
@@ -4296,6 +4320,14 @@
         "songHash": "Michael Schenker Group - Assault Attack"
     },
     {
+        "title": "Dancer (2009 Remaster)",
+        "channelName": "Michael Schenker Group - Topic",
+        "channelId": "UCVSBmKue3_aRzDvdPTg-IIw",
+        "id": "qA6vxjxrSk4",
+        "publishedAt": "2025-06-21T10:27:28Z",
+        "songHash": "Michael Schenker Group - Dancer"
+    },
+    {
         "title": "Let It Out",
         "channelName": "Miho Fukuhara - Topic",
         "channelId": "UC71ef6mxNVZNkyoLoIUu0kw",
@@ -4310,6 +4342,14 @@
         "id": "HAHJUtSR90g",
         "publishedAt": "2024-11-17T21:39:52Z",
         "songHash": "Mio Honda Step 60 Fps Full Hq Audio"
+    },
+    {
+        "title": "Morgana - Your Recall",
+        "channelName": "Arcaliz",
+        "channelId": "UCtfkHLdhwi333bH3-uShNYw",
+        "id": "C1sLIFCbFgQ",
+        "publishedAt": "2025-06-04T22:39:53Z",
+        "songHash": "Morgana - Your Recall"
     },
     {
         "title": "Dr. Feelgood",
@@ -4760,6 +4800,14 @@
         "songHash": "Olympos Mons - Black"
     },
     {
+        "title": "Olympos Mons - Cleopatra",
+        "channelName": "Mother Of Power Metal",
+        "channelId": "UCSndFzcAOlSw9TOlhzDkdxw",
+        "id": "9XV9FFyYEeY",
+        "publishedAt": "2025-05-30T16:32:58Z",
+        "songHash": "Olympos Mons - Cleopatra"
+    },
+    {
         "title": "Olympos Mons - One Word",
         "channelName": "NagaHeadbanger",
         "channelId": "UCLQd4vwED5zTmllLDAdvsMw",
@@ -4782,6 +4830,14 @@
         "id": "o0RE230PlX4",
         "publishedAt": "2024-12-03T08:30:41Z",
         "songHash": "Ozzy Osbourne - Mr Crowley"
+    },
+    {
+        "title": "Party in My Head",
+        "channelName": "PAIN - Topic",
+        "channelId": "UCnXU-0bSwZkewvXPB2O5J-w",
+        "id": "rFKn0YB8Xsg",
+        "publishedAt": "2025-06-12T07:18:14Z",
+        "songHash": "Pain - Party In My Head"
     },
     {
         "title": "Payday 2 Official Soundtrack - #09 Razormind",
@@ -5624,6 +5680,14 @@
         "songHash": "Reptilian - Change Your Heart"
     },
     {
+        "title": "Dreamchild",
+        "channelName": "Revolution Renaissance - Topic",
+        "channelId": "UCtAwIDHUxLv_URmHVaUtItQ",
+        "id": "ufIkUxRUOl8",
+        "publishedAt": "2025-06-16T13:07:07Z",
+        "songHash": "Revolution Renaissance - Dreamchild"
+    },
+    {
         "title": "RIOT - Overkill but without the 40 second long end",
         "channelName": "Dat Legendary Gamer",
         "channelId": "UCzItEHUyRq0xYfbVihgokZw",
@@ -5739,8 +5803,8 @@
         "title": "The Hour of Dawn",
         "channelName": "Rob Rock - Topic",
         "channelId": "UCz1YAgo22N4fpy6NmFw2hKg",
-        "id": "Wk_JmXGykyc",
-        "publishedAt": "2024-11-17T04:23:21Z",
+        "id": "9Mi91EsPzYg",
+        "publishedAt": "2025-06-25T16:45:30Z",
         "songHash": "Rob Rock - The Hour Of Dawn"
     },
     {
@@ -5902,6 +5966,14 @@
         "id": "KJ47vlZBR28",
         "publishedAt": "2024-11-16T23:54:32Z",
         "songHash": "Sabaton - Hellrider"
+    },
+    {
+        "title": "Hordes of Khan",
+        "channelName": "Sabaton - Topic",
+        "channelId": "UCxJrBLPnyUIt6K33m9ZcsqA",
+        "id": "Sg9vwtXGY8U",
+        "publishedAt": "2025-06-10T00:56:02Z",
+        "songHash": "Sabaton - Hordes Of Khan"
     },
     {
         "title": "In the Army Now",
@@ -6422,6 +6494,14 @@
         "id": "KUoDPJaiyfs",
         "publishedAt": "2024-11-17T04:28:52Z",
         "songHash": "Silent Knight - The Final Countdown"
+    },
+    {
+        "title": "The Flight of Icarus",
+        "channelName": "Silverlane - Topic",
+        "channelId": "UCU3Fi2PJvoh5XleOP-xGlhQ",
+        "id": "LnJ7DZByGZs",
+        "publishedAt": "2025-06-16T13:34:56Z",
+        "songHash": "Silverlane - The Flight Of Icarus"
     },
     {
         "title": "Simon Viklund – Break the Rules (lyrics)",
@@ -8534,6 +8614,14 @@
         "id": "RN8Li7kYNnw",
         "publishedAt": "2024-11-30T01:12:04Z",
         "songHash": "Village People - Ymca"
+    },
+    {
+        "title": "Virgin Steele - Through Blood And Fire lyrics - Heavy/Thrash Monday",
+        "channelName": "Metal Anthology",
+        "channelId": "UCYW9mFZ4x_UmGKwBPPWhF0g",
+        "id": "TcgUz_FlsKo",
+        "publishedAt": "2025-06-16T13:13:40Z",
+        "songHash": "Virgin Steele - Through Blood And Fire Lyrics - Heavy Thrash Monday"
     },
     {
         "title": "Vivaldi - four seasons ( winter metal version )",
