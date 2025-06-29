@@ -21,7 +21,13 @@ device2 := "{0.0.0.00000000}.{521dd965-1034-4535-9f0c-14f8eee62372}" ; enceintes
 
 currentDevice := GetCurrentDefaultAudioDevice()
 
-if (currentDevice = device1) {
+if (A_Args[1] = "casque") {
+	SetDefaultEndpoint(device1)
+    ToolTip("Son sur casque")
+} else if (A_Args[1] = "enceintes") {
+    SetDefaultEndpoint(device2)
+    ToolTip("Son sur enceintes")
+} else if (currentDevice = device1) {
     SetDefaultEndpoint(device2)
     ToolTip("Son sur enceintes")
 } else {
