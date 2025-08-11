@@ -4,11 +4,13 @@ import json, os, sys
 import youtube
 import notion
 import config
+import bookmarks
 
 #Does all the daily tasks
 
 youtube = youtube.Youtube()
 notion = notion.Notion()
+bookmarks = bookmarks.Bookmarks()
 
 def sortMusicPlaylists():
 
@@ -125,9 +127,20 @@ def backupNotion():
     print("Backing up Notion...")
     notion.backupAllPages()
 
+def backupBookmarks():
+    print("Backing up bookmarks...")
+    bookmarksList = bookmarks.getBookmarks()
+    with open("bookmarks.json", "w+", encoding="utf-8") as f:
+        f.write(json.dumps(bookmarksList, indent=4, ensure_ascii=False))
 
-sortMusicPlaylists()
-backupYtPlaylists()
-backupNotion()
+    publicBookmarks = [b for b in bookmarksList if b["title"] != "Streaming"]
+
+    with open("D:/repos/blog/articles/bookmarks.md", "w+", encoding="utf-8") as f:
+        f.write("---\naside: false\n---\n\n# Useful websites\n\n" + bookmarks.bookmarksToMarkdown(publicBookmarks))
+
+#sortMusicPlaylists()
+#backupYtPlaylists()
+#backupNotion()
+backupBookmarks()
 
 print("Done")

@@ -68,3 +68,13 @@ def sanitizeForWindowsFilename(s):
         "\u001F": " ",
         "\u007F": " ",
     })).strip()
+
+def sanitizeForMarkdown(s, isUrl=False):
+    # Escape special characters for Markdown
+    s = s.replace("\\", "\\\\")
+    if isUrl:
+        s = s.replace("&", "%26").replace("<", "%3C").replace(">", "%3E").replace("'", "%27").replace('"', "%22").replace(" ", "%20")
+    else:
+        s = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("'", "&apos;").replace('"', "&quot;")
+    s = re.sub(r'([*_`\[\]\(\)])', r'\\\1', s)
+    return s
