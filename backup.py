@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 
 import json, os, sys
-import youtube
-import notion
+import youtube as youtube_module
+import notion as notion_module
 import config
-import bookmarks
+import bookmarks as bookmarks_module
 
 #Does all the daily tasks
 
-youtube = youtube.Youtube()
-notion = notion.Notion()
-bookmarks = bookmarks.Bookmarks()
+youtube = youtube_module.Youtube()
+notion = notion_module.Notion()
+bookmarks = bookmarks_module.Bookmarks()
 
 def sortMusicPlaylists():
 
@@ -138,9 +138,11 @@ def backupBookmarks():
     with open("D:/repos/blog/articles/bookmarks.md", "w+", encoding="utf-8") as f:
         f.write("---\naside: false\n---\n\n# Useful websites\n\n" + bookmarks.bookmarksToMarkdown(publicBookmarks))
 
-#sortMusicPlaylists()
-#backupYtPlaylists()
-#backupNotion()
-backupBookmarks()
+if __name__ == "__main__":
 
-print("Done")
+    #sortMusicPlaylists()
+    #backupYtPlaylists()
+    backupNotion()
+    backupBookmarks()
+
+    print("Done")

@@ -2,9 +2,36 @@
 
 import base64
 import os, json, sys, re
+import unicodedata
 import base32768
 
 SEPARATOR = "︱"
+
+
+def unicodeToAscii(s):
+    #Translate unicode to ascii as best as possible. Eg special spaces to normal spaces, "é" to "e", etc
+
+    s = s.translate(str.maketrans({
+        "\u00A0": " ",
+        "\u2000": " ",
+        "\u2001": " ",
+        "\u2002": " ",
+        "\u2003": " ",
+        "\u2004": " ",
+        "\u2005": " ",
+        "\u2006": " ",
+        "\u2007": " ",
+        "\u2008": " ",
+        "\u2009": " ",
+        "\u200A": " ",
+        "\u200B": "",
+        "\u202F": " ",
+        "\u205F": " ",
+        "\u3000": " ",
+        "\uFEFF": "",
+    }))
+
+    return unicodedata.normalize('NFD', s).encode('ascii', 'ignore').decode('utf-8')
 
 def guidToBase32768(guidStr):
     guidBytes = bytes.fromhex(guidStr.replace("-", ""))

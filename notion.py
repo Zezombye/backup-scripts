@@ -35,6 +35,22 @@ class Notion():
 
         self.youtube = youtube.Youtube()
 
+        self.check_auth()
+
+
+    def check_auth(self):
+        r = self.session.post("https://www.notion.so/api/v3/authValidate")
+        if not r.ok:
+            raise Exception("Failed to authenticate with Notion. Status code: %s, %s" % (r.status_code, r.text))
+        
+        #get https://www.notion.so/login (html page, just to get the cookies)
+        #make_request("post", "getLoginOptions", {"email": "...", requireWorkTypeEmail": False})
+        #response: {"hasAccount":true,"samlSignIn":"unavailable","passwordSignIn":true,"mustReverify":false,"loginOptionsToken":"v02:login_options:..."}
+        #make_request("post", "loginWithEmail", {"email":"...","password":"...","loginOptionsToken":"v02:login_options:..."})
+        #then try authValidate again
+
+
+
 
     def make_request(self, method, url, data=None):
         r = self.session.request(method, url, json=data)

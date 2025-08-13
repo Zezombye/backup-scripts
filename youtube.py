@@ -23,7 +23,7 @@ class Youtube():
         clientSecretsFile = "c:/users/zezombye/yt_client_secret.json"
 
         try:
-            credentials = google.oauth2.credentials.Credentials.from_authorized_user_file(clientSecretsFile)
+            credentials = google.oauth2.credentials.Credentials.from_authorized_user_file(clientSecretsFile) # type: ignore
         except (ValueError) as e: # first run with new secret.json
             flow = InstalledAppFlow.from_client_secrets_file(clientSecretsFile, ["https://www.googleapis.com/auth/youtube"])
             credentials = flow.run_local_server(port=0)
@@ -64,8 +64,7 @@ class Youtube():
     def normalize(self, text):
 
         text = text.lower()
-        # Remove accents
-        text = unicodedata.normalize('NFD', text).encode('ascii', 'ignore').decode('utf-8')
+        text = utils.unicodeToAscii(text)
 
         text = text.replace("'", "").replace(".", "")
         text = text.replace(" & ", " and ")
