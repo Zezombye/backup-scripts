@@ -7,10 +7,10 @@ WL_ID = "PLK5yrmOBPizjuP7IUTU3HcCo3YJ3L96Dz" #I guess useful in case I want to s
 
 #Those playlists will be sorted according to song hash (except if in ytMusicPlaylistsToNotSort), and checked for unavailable videos as well as duplicates
 ytMusicPlaylists = [
-    "PLDS8MSVtwiPZ53t18Oae17V71yCPffK9r", #Romantic mixtape
     "PLDS8MSVtwiPYVvz3D43_gWJGfXKv8ZTxg", #Best of music
-    "PLDS8MSVtwiPZMhCA6ABpJCVBWCY4WcKw3", #Ballads & soft songs
     "PLDS8MSVtwiPZ0QHhxgNaoAPCTgXL4aYfQ", #Best of albums
+    "PLDS8MSVtwiPZMhCA6ABpJCVBWCY4WcKw3", #Ballads & soft songs
+    "PLDS8MSVtwiPZ53t18Oae17V71yCPffK9r", #Romantic mixtape
 ]
 ytMusicPlaylistsToNotSort = [
     "PLDS8MSVtwiPZ53t18Oae17V71yCPffK9r", #Romantic mixtape

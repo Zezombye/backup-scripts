@@ -75,8 +75,10 @@ class Youtube():
         text = re.sub(r'\[.*?\]', '', text)
 
         #"Artist: song" -> "Artist - song"
-        #We don't care if it also affects the title, it leads to better sorting
-        text = re.sub(r':', ' - ', text)
+        #We don't care too much if it also affects the title, it leads to better sorting
+        #Don't do this if there is a dash before the ":", as then the colon is probably part of the song title
+        if ":" in text and " - " not in text[:text.index(":")]:
+            text = text.replace(":", " - ", 1)
         # Replace punctuation (except dashes) with spaces
         text = re.sub(r'[^\w\s-]', ' ', text)
 
@@ -97,6 +99,7 @@ class Youtube():
             "UCus8EVJ7Oc9zINhs-fg8l1Q", #Turbo
             "UC9EzN5XNxhxqHZevM9kSuaw", #Approaching Nirvana
             "UCZU9T1ceaOgwfLRq7OKFU4Q", #Linkin Park
+            "UCmdrjl3147JYoJHQVGfP7Ew", #Derdian
         ]:
             #Official music video
             artist = self.normalize(video["channelName"]).replace(" - topic", "")
@@ -115,6 +118,9 @@ class Youtube():
         specialCases = {
             "or7GVQ9R-Lc": "Steve Ouimette - Lous Revenge",
             "l_rbFhbcbT8": "Red Alert 3 Theme - Soviet March",
+            "ywtt_eaZQeg": "Holyhell - Revelations",
+            "SrmSTJYWiBs": "Holyhell - Wings of Light",
+            "xfxue_zMb7A": "Holyhell - Apocalypse",
         }
         if video["id"] in specialCases:
             title = self.normalize(specialCases[video["id"]])

@@ -1,6 +1,13 @@
 #!/usr/bin/python3
 
+import datetime
+import hashlib
+import shutil
+import subprocess
 import json, os, sys
+
+import requests
+import utils
 import youtube as youtube_module
 import notion as notion_module
 import config
@@ -15,6 +22,8 @@ bookmarks = bookmarks_module.Bookmarks()
 def sortMusicPlaylists():
 
     print("Sorting music playlists...")
+
+    ytPlaylists = {}
 
     for playlistId in config.ytMusicPlaylists:
         playlistInfo = youtube.get_playlist_info(playlistId)
@@ -101,9 +110,9 @@ def sortMusicPlaylists():
         #for video in videos:
         #    print(video["position"], self.getSongHash(video))
 
-
-        with open("yt_playlists/"+youtube.normalize(playlistInfo["title"]).replace(" ", "_")+".json", "w+", encoding="utf-8") as f:
-            f.write(json.dumps([{
+        ytPlaylists[playlistInfo["title"]] = {
+            "id": playlistId,
+            "videos":  [{
                 "title": v["title"],
                 #"description": v["description"],
                 "channelName": v["channelName"],
@@ -111,7 +120,17 @@ def sortMusicPlaylists():
                 "id": v["id"],
                 "publishedAt": v["publishedAt"],
                 "songHash": v["songHash"],
-            } for v in videos], indent=4, ensure_ascii=False))
+            } for v in videos]
+        }
+
+
+    markdownResult = "<script setup>\nimport YtPlaylist from '../components/YtPlaylist.vue'\n</script>\n\n# Music playlists\n\nSee https://github.com/Zezombye/backup-scripts/blob/master/backup.py for my playlist sorting + backup script.\n\n"
+    for playlistName, playlistData in ytPlaylists.items():
+        markdownResult += "## ["+utils.sanitizeForMarkdown(playlistName)+"](https://youtube.com/playlist?list="+playlistData["id"]+")\n\n"
+        markdownResult += "<YtPlaylist :videos=\""+utils.sanitizeForHtml(json.dumps(playlistData["videos"], indent=4, ensure_ascii=False))+"\"/>\n\n"
+
+    with open("D:/repos/blog/articles/playlists.md", "w+", encoding="utf-8", newline="\n") as f:
+        f.write(markdownResult)
 
 
 def backupYtPlaylists():
@@ -130,19 +149,42 @@ def backupNotion():
 def backupBookmarks():
     print("Backing up bookmarks...")
     bookmarksList = bookmarks.getBookmarks()
-    with open("D:/bkp/bookmarks.json", "w+", encoding="utf-8") as f:
+    with open("D:/bkp/bookmarks.json", "w+", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(bookmarksList, indent=4, ensure_ascii=False))
 
     publicBookmarks = [b for b in bookmarksList if b["title"] != "Streaming"]
 
-    with open("D:/repos/blog/articles/bookmarks.md", "w+", encoding="utf-8") as f:
+    with open("D:/repos/blog/articles/bookmarks.md", "w+", encoding="utf-8", newline="\n") as f:
         f.write("---\naside: false\n---\n\n# Useful websites\n\n" + bookmarks.bookmarksToMarkdown(publicBookmarks))
+
+
+def publishAutoBackups():
+
+    files = ["articles/bookmarks.md", "articles/playlists.md"]
+
+    subprocess.check_output("git -C D:/repos/blog add " + " ".join(files), shell=True)
+    status = subprocess.check_output("git -C D:/repos/blog status --porcelain", shell=True).decode().strip().splitlines()
+    filesToCommit = []
+    for file in files:
+        if " M " + file in status or "M  " + file in status or "AM " + file in status:
+            filesToCommit.append(file)
+
+    if len(filesToCommit) == 0:
+        print("Nothing to auto backup")
+        return
+    
+    print("Publishing auto backup for " + ", ".join(filesToCommit))
+    
+    subprocess.check_output("git -C D:/repos/blog commit -m \"[Auto backup] " + ", ".join(filesToCommit) + "\" " + " ".join(filesToCommit), shell=True)
+    subprocess.check_output("git -C D:/repos/blog push", shell=True)
+
 
 if __name__ == "__main__":
 
-    #sortMusicPlaylists()
+    sortMusicPlaylists()
     #backupYtPlaylists()
-    backupNotion()
+    #backupNotion()
     backupBookmarks()
+    publishAutoBackups()
 
     print("Done")

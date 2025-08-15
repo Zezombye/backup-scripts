@@ -29,6 +29,17 @@ def unicodeToAscii(s):
         "\u205F": " ",
         "\u3000": " ",
         "\uFEFF": "",
+        "\u2010": "-",
+        "\u2011": "-",
+        "\u2012": "-",
+        "\u2013": "-",
+        "\u2014": "-",
+        "\u2015": "-",
+        "\u2018": "'",
+        "\u2019": "'",
+        "\u201C": '"',
+        "\u201D": '"',
+        "\u2026": "...",
     }))
 
     return unicodedata.normalize('NFD', s).encode('ascii', 'ignore').decode('utf-8')
@@ -96,12 +107,17 @@ def sanitizeForWindowsFilename(s):
         "\u007F": " ",
     })).strip()
 
+
+def sanitizeForHtml(s):
+    s = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("'", "&apos;").replace('"', "&quot;")
+    return s
+
 def sanitizeForMarkdown(s, isUrl=False):
     # Escape special characters for Markdown
     s = s.replace("\\", "\\\\")
     if isUrl:
         s = s.replace("&", "%26").replace("<", "%3C").replace(">", "%3E").replace("'", "%27").replace('"', "%22").replace(" ", "%20")
     else:
-        s = s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("'", "&apos;").replace('"', "&quot;")
+        s = sanitizeForHtml(s)
     s = re.sub(r'([*_`\[\]\(\)])', r'\\\1', s)
     return s
