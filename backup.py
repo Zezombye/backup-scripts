@@ -130,7 +130,7 @@ def backupNotion():
 def backupBookmarks():
     print("Backing up bookmarks...")
     bookmarksList = bookmarks.getBookmarks()
-    with open("bookmarks.json", "w+", encoding="utf-8") as f:
+    with open("D:/bkp/bookmarks.json", "w+", encoding="utf-8") as f:
         f.write(json.dumps(bookmarksList, indent=4, ensure_ascii=False))
 
     publicBookmarks = [b for b in bookmarksList if b["title"] != "Streaming"]
