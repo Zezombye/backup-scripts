@@ -311,6 +311,8 @@ class Youtube():
                 print("Could not download video '%s' (%s)" % (video["id"], video["title"]), file=sys.stderr)
                 #Do not raise, it was very probably a video which is no longer available, which is why we back up :)
 
+            time.sleep(5)
+
 
 
     def sort_playlist(self, playlist_id, playlist_items):

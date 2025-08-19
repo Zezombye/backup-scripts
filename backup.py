@@ -12,12 +12,14 @@ import youtube as youtube_module
 import notion as notion_module
 import config
 import bookmarks as bookmarks_module
+import reddit as reddit_module
 
 #Does all the daily tasks
 
 youtube = youtube_module.Youtube()
 notion = notion_module.Notion()
 bookmarks = bookmarks_module.Bookmarks()
+reddit = reddit_module.Reddit()
 
 def sortMusicPlaylists():
 
@@ -146,10 +148,18 @@ def backupNotion():
     print("Backing up Notion...")
     notion.backupAllPages()
 
+
+def backupReddit():
+    print("Backing up Reddit...")
+    saved_items = reddit.get_saved_posts()
+    for i, saved_item in enumerate(saved_items):
+        reddit.downloadPost(saved_item)
+
+
 def backupBookmarks():
     print("Backing up bookmarks...")
     bookmarksList = bookmarks.getBookmarks()
-    with open("D:/bkp/bookmarks.json", "w+", encoding="utf-8", newline="\n") as f:
+    with open(config.BACKUP_DIR+"bookmarks.json", "w+", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(bookmarksList, indent=4, ensure_ascii=False))
 
     publicBookmarks = [b for b in bookmarksList if b["title"] != "Streaming"]
@@ -179,12 +189,35 @@ def publishAutoBackups():
     subprocess.check_output("git -C D:/repos/blog push", shell=True)
 
 
+def mirror():
+    #Copy all files from BACKUP_DIR to MIRROR_DIR if the modification time is newer or the file does not exist in MIRROR_DIR
+
+    ignoredFiles = subprocess.check_output("git -C " + config.MIRROR_DIR + " ls-files --others --ignored --exclude-standard", shell=True).decode().strip().splitlines()
+
+    utils.mirrorDirs(config.BACKUP_DIR, config.MIRROR_DIR, ignoredFiles)
+
+    for dir in config.additionalDirsToMirror:
+        dirBasename = os.path.basename(dir.rstrip("/"))
+        if not dirBasename:
+            raise ValueError("Directory '%s' is not valid, it must end with a slash" % (dir))
+        os.makedirs(config.MIRROR_DIR + dirBasename, exist_ok=True)
+        utils.mirrorDirs(dir, config.MIRROR_DIR + dirBasename, [])
+
+    subprocess.check_output("git -C " + config.MIRROR_DIR + " add .", shell=True)
+    if subprocess.check_output("git -C " + config.MIRROR_DIR + " status --porcelain", shell=True).decode().strip() != "":
+        subprocess.check_output("git -C " + config.MIRROR_DIR + " commit -m \"Mirror backup\"", shell=True)
+        subprocess.check_output("git -C " + config.MIRROR_DIR + " push", shell=True)
+
+
+
 if __name__ == "__main__":
 
-    sortMusicPlaylists()
+    #sortMusicPlaylists()
     #backupYtPlaylists()
     #backupNotion()
-    backupBookmarks()
-    publishAutoBackups()
+    #backupReddit()
+    #backupBookmarks()
+    #publishAutoBackups()
+    mirror()
 
     print("Done")

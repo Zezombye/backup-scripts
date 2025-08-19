@@ -1,9 +1,18 @@
 #!/usr/bin/python3
 import os, json
 
-BACKUP_DIR = "D:/bkp/"
+BACKUP_DIR = "D:/mega/bkp/"
+MIRROR_DIR = "D:/bkp/"
+
+additionalDirsToMirror = [
+    "D:/mega/images/",
+    "D:/mega/internet quizzes/",
+    "D:/mega/memes/",
+    "D:/mega/wallpapers/",
+]
 
 WL_ID = "PLK5yrmOBPizjuP7IUTU3HcCo3YJ3L96Dz" #I guess useful in case I want to sort it or something
+
 
 #Those playlists will be sorted according to song hash (except if in ytMusicPlaylistsToNotSort), and checked for unavailable videos as well as duplicates
 ytMusicPlaylists = [

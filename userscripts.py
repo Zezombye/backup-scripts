@@ -5,6 +5,7 @@ import os
 import json
 import traceback
 import snappy
+import config
 import utils
 import re
 
@@ -15,8 +16,8 @@ class Userscripts:
 
         self.USERSCRIPTS_DB = "C:/Users/Zezombye/AppData/Roaming/Mozilla/Firefox/Profiles/r530li2w.default/storage/default/moz-extension+++89947469-5500-4ab3-b43b-6c2924c35bc8^userContextId=4294967295/idb/3647222921wleabcEoxlt-eengsairo.sqlite"
 
-        self.userstylesBackupDir = "D:/bkp/userstyles/"
-        self.userscriptsBackupDir = "D:/bkp/userscripts/"
+        self.userstylesBackupDir = config.BACKUP_DIR+"userstyles/"
+        self.userscriptsBackupDir = config.BACKUP_DIR+"userscripts/"
 
 
     def parseUserstyleData(self, data):

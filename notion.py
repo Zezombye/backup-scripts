@@ -222,10 +222,8 @@ class Notion():
                 print("Creating directory '%s' for page id '%s'" % (targetDir, pageId))
             os.makedirs(targetDir, exist_ok=True)
 
-            with open(targetDir+"/_page.json", "w+", encoding="utf-8") as f:
-                f.write(json.dumps(pages[pageId], indent=4, ensure_ascii=False))
-
-            os.utime(targetDir+"/_page.json", (pages[pageId]["lastEditedTimestamp"], pages[pageId]["lastEditedTimestamp"]))
+            utils.writeTextToFile(targetDir+"/_page.json.enc", json.dumps(pages[pageId], indent=4, ensure_ascii=False), encrypt=True)
+            os.utime(targetDir+"/_page.json.enc", (pages[pageId]["lastEditedTimestamp"], pages[pageId]["lastEditedTimestamp"]))
 
             pages[pageId]["ytVideoIds"] = list(set(pages[pageId]["ytVideoIds"]))
             for ytVideoId in pages[pageId]["ytVideoIds"]:
@@ -246,7 +244,7 @@ class Notion():
         #We can speed up the process and make the logs less verbose by comparing the modification date of _page.json to the modification date of the page itself.
         #If these timestamps are equivalent, then skip the backup of the page. Else, backup the page and set the modification date of _page.json to match Notion.
         for pageId in pages:
-            pageJsonPath = os.path.join(self.BACKUP_DIR, self.getPagePath(pages, pageId), "_page.json")
+            pageJsonPath = os.path.join(self.BACKUP_DIR, self.getPagePath(pages, pageId), "_page.json.enc")
             if os.path.exists(pageJsonPath) and int(os.path.getmtime(pageJsonPath)) == pages[pageId]["lastEditedTimestamp"]:
                 pages[pageId]["skipBackup"] = True
             else:

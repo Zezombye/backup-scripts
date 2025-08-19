@@ -8,6 +8,7 @@ from datetime import datetime
 import time
 from bs4 import BeautifulSoup
 import requests
+import config
 import utils
 import waybackmachine
 import urllib.parse
@@ -34,20 +35,11 @@ class Reddit():
         self.waybackMachine = waybackmachine.WaybackMachine()
 
 
-        os.makedirs("D:/bkp/reddit/css", exist_ok=True)
-        os.makedirs("D:/bkp/reddit/js", exist_ok=True)
-        os.makedirs("D:/bkp/reddit/img", exist_ok=True)
-        os.makedirs("D:/bkp/reddit/videos", exist_ok=True)
-        with open("D:/bkp/reddit/css/_additional-styles.css", "w+", encoding="utf-8", newline="\n") as f:
-            f.write("""
-                /* Additional styles for Reddit backups (remove signup banners etc) */
-                section.infobar.listingsignupbar {
-                    display: none !important;
-                }
-                section.infobar.commentsignupbar {
-                    display: none !important;
-                }
-            """)
+        os.makedirs(config.BACKUP_DIR+"reddit/css", exist_ok=True)
+        os.makedirs(config.BACKUP_DIR+"reddit/js", exist_ok=True)
+        os.makedirs(config.BACKUP_DIR+"reddit/img", exist_ok=True)
+        os.makedirs(config.BACKUP_DIR+"reddit/videos", exist_ok=True)
+        
 
     def get_saved_posts(self, limit=None):
 
@@ -98,7 +90,7 @@ class Reddit():
         if not img_url.startswith("https://i.redd.it/"):
             raise ValueError("Invalid image URL: %s" % img_url)
         
-        img_filename = "D:/bkp/reddit/img/" + utils.sanitizeForWindowsFilename(img_url.split("?")[0])
+        img_filename = config.BACKUP_DIR+"reddit/img/" + utils.sanitizeForWindowsFilename(img_url.split("?")[0])
         if os.path.exists(img_filename):
             print("Image %s already exists, skipping" % (img_url))
             return
@@ -117,10 +109,10 @@ class Reddit():
         id = post["id"]
         title = post["title"]
         subredditDir = utils.sanitizeForWindowsFilename(post["subreddit"])
-        os.makedirs("D:/bkp/reddit/"+subredditDir, exist_ok=True)
+        os.makedirs(config.BACKUP_DIR+"reddit/"+subredditDir, exist_ok=True)
         filename = post["created_date"].split(" ")[0]+utils.SEPARATOR+ utils.sanitizeForWindowsFilename(title)[:200] + utils.SEPARATOR+id+ ".html"
 
-        for file in os.listdir("D:/bkp/reddit/"+subredditDir):
+        for file in os.listdir(config.BACKUP_DIR+"reddit/"+subredditDir):
             if file.endswith(utils.SEPARATOR+id+ ".html"):
                 print("Post %s '%s' already exists, skipping" % (id, title))
                 return
@@ -159,7 +151,7 @@ class Reddit():
 
             stylesheet['href'] = "../css/"+utils.sanitizeForWindowsFilename(href)
 
-            css_filename = "D:/bkp/reddit/css/" + utils.sanitizeForWindowsFilename(href)
+            css_filename = config.BACKUP_DIR+"reddit/css/" + utils.sanitizeForWindowsFilename(href)
 
             if os.path.exists(css_filename):
                 #print("Stylesheet %s already exists, skipping" % (href))
@@ -186,7 +178,7 @@ class Reddit():
 
             script['src'] = "../js/"+utils.sanitizeForWindowsFilename(src)
 
-            js_filename = "D:/bkp/reddit/js/" + utils.sanitizeForWindowsFilename(src)
+            js_filename = config.BACKUP_DIR+"reddit/js/" + utils.sanitizeForWindowsFilename(src)
 
             if os.path.exists(js_filename):
                 #print("Script %s already exists, skipping" % (src))
@@ -228,7 +220,7 @@ class Reddit():
                 raise ValueError("Video post URL is not valid: '%s'" % post["url"])
             
             videoId = post["url"].split("?")[0].split("/")[-1]
-            videoFilename = "D:/bkp/reddit/videos/" + videoId+ ".mp4"
+            videoFilename = config.BACKUP_DIR+"reddit/videos/" + videoId+ ".mp4"
             if not os.path.exists(videoFilename):
                 print("Downloading video:", post["url"])
                 subprocess.check_output(["yt-dlp", "-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]", "-o", videoFilename, post["url"]], stderr=subprocess.STDOUT)
@@ -278,7 +270,7 @@ class Reddit():
         
 
         soup.find("head").append(soup.new_tag("link", rel="stylesheet", href="../css/_additional-styles.css")) # pyright: ignore[reportOptionalMemberAccess]
-        with open("D:/bkp/reddit/"+subredditDir+"/"+filename, "w+", encoding="utf-8", newline="\n") as file:
+        with open(config.BACKUP_DIR+"reddit/"+subredditDir+"/"+filename, "w+", encoding="utf-8", newline="\n") as file:
             file.write("<!--\n"+post["apiData"]+"\n-->\n"+soup.prettify())
 
         time.sleep(5)

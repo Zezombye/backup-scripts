@@ -4,6 +4,9 @@ import base64
 import os, json, sys, re
 import unicodedata
 import base32768
+import encryption
+
+encryptionManager = encryption.EncryptionManager()
 
 SEPARATOR = "︱"
 
@@ -121,3 +124,37 @@ def sanitizeForMarkdown(s, isUrl=False):
         s = sanitizeForHtml(s)
     s = re.sub(r'([*_`\[\]\(\)])', r'\\\1', s)
     return s
+
+
+def writeTextToFile(filename, data, encrypt=False, retention=False):
+    writeBytesToFile(filename, data.encode('utf-8'), encrypt=encrypt, retention=retention)
+
+def writeBytesToFile(filename, data, encrypt=False, retention=False):
+    #Write data to a temp file then rename it, to be atomic.
+    tempFile = "D:/backup_file.tmp"
+    if encrypt:
+        if not filename.endswith(".enc"):
+            raise ValueError("Filename '%s' must end with .enc to encrypt" % (filename))
+        data = encryptionManager.encrypt(data)
+
+    with open(tempFile, "wb+") as f:
+        f.write(data)
+
+    os.replace(tempFile, filename)
+
+
+def mirrorDirs(srcDir, destDir, ignoredFiles=[]):
+    print("Mirroring files from %s to %s" % (srcDir, destDir))
+    
+    for root, dirs, files in os.walk(srcDir):
+        for file in files:
+            srcFile = os.path.join(root, file)
+            relPath = os.path.relpath(srcFile, srcDir)
+            destFile = os.path.join(destDir, relPath)
+
+            if not os.path.exists(destFile) or os.path.getmtime(srcFile) > os.path.getmtime(destFile):
+                if os.path.exists(destFile) and relPath.replace("\\", "/").rstrip("/") in ignoredFiles:
+                    raise Exception("File '%s' has been modified but is ignored by the backup .gitignore" % (relPath))
+                print("Copying %s to %s" % (srcFile, destFile))
+                #os.makedirs(os.path.dirname(destFile), exist_ok=True)
+                #shutil.copy2(srcFile, destFile)
