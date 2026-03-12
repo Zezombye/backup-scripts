@@ -223,7 +223,10 @@ class Reddit():
             videoFilename = config.BACKUP_DIR+"reddit/videos/" + videoId+ ".mp4"
             if not os.path.exists(videoFilename):
                 print("Downloading video:", post["url"])
-                subprocess.check_output(["yt-dlp", "-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]", "-o", videoFilename, post["url"]], stderr=subprocess.STDOUT)
+                try:
+                    subprocess.check_output(["yt-dlp", "--impersonate", "chrome", "-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]", "-o", videoFilename, post["url"]], stderr=subprocess.STDOUT)
+                except subprocess.CalledProcessError as e:
+                    raise Exception("Failed to download video %s: %s" % (post["url"], e.output.decode()))
 
             inlineVideoTag = soup.find("div", class_="media-preview-content video-player")
             if not inlineVideoTag:

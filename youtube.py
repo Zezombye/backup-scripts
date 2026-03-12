@@ -225,7 +225,7 @@ class Youtube():
             raise ValueError("Invalid video id '%s'" % (videoId))
 
         for file in os.listdir(destinationDir):
-            if any([x == videoId for x in file.split(utils.SEPARATOR)[:2]]):
+            if any([x == videoId for x in file.split(utils.SEPARATOR)[:2]]) and file.endswith((".mp4", ".mkv", ".mp3", ".opus", ".m4a")):
                 #print("Video '%s' is already downloaded" % (videoId))
                 return
 
@@ -235,7 +235,7 @@ class Youtube():
             #Note: max resolution is 720p to not take gigabytes of data for podcasts. This is for backups, we don't need high resolution
             #Going from 1080p to 720p is up to 80% reduction in size
 
-            command = 'yt-dlp "https://www.youtube.com/watch?v='+videoId+'" --abort-on-error --embed-metadata --trim-filenames 250'
+            command = 'yt-dlp "https://www.youtube.com/watch?v='+videoId+'" --abort-on-error --embed-metadata --trim-filenames 250 --js-runtimes deno'
 
             playlistIndexStr = ("%02d"%(playlistIndex)+utils.SEPARATOR if playlistIndex is not None else "")
             if audioOnly:

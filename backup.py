@@ -13,6 +13,7 @@ import notion as notion_module
 import config
 import bookmarks as bookmarks_module
 import reddit as reddit_module
+import userscripts as userscripts_module
 
 #Does all the daily tasks
 
@@ -20,6 +21,7 @@ youtube = youtube_module.Youtube()
 notion = notion_module.Notion()
 bookmarks = bookmarks_module.Bookmarks()
 reddit = reddit_module.Reddit()
+userscripts = userscripts_module.Userscripts()
 
 def sortMusicPlaylists():
 
@@ -168,6 +170,10 @@ def backupBookmarks():
         f.write("---\naside: false\n---\n\n# Useful websites\n\n" + bookmarks.bookmarksToMarkdown(publicBookmarks))
 
 
+def backupUserscripts():
+    userscripts.backup()
+    
+
 def publishAutoBackups():
 
     files = ["articles/bookmarks.md", "articles/playlists.md"]
@@ -217,6 +223,7 @@ if __name__ == "__main__":
     #backupNotion()
     #backupReddit()
     #backupBookmarks()
+    backupUserscripts()
     #publishAutoBackups()
     mirror()
 

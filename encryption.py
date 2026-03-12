@@ -62,7 +62,7 @@ class EncryptionManager:
         ciphertext_with_tag = data[self.RSA_ENCRYPTED_KEY_SIZE + self.AES_NONCE_SIZE:]
 
         # 2. Decrypt the symmetric key with the RSA private key
-        symmetric_key = self.decryptionKey.decrypt(
+        symmetric_key = self.decryptionKey.decrypt( # type: ignore
             encrypted_symmetric_key,
             padding.OAEP(
                 mgf=padding.MGF1(algorithm=hashes.SHA256()),

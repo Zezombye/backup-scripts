@@ -5,6 +5,7 @@ import os, json, sys, re
 import unicodedata
 import base32768
 import encryption
+import shutil
 
 encryptionManager = encryption.EncryptionManager()
 
@@ -154,7 +155,8 @@ def mirrorDirs(srcDir, destDir, ignoredFiles=[]):
 
             if not os.path.exists(destFile) or os.path.getmtime(srcFile) > os.path.getmtime(destFile):
                 if os.path.exists(destFile) and relPath.replace("\\", "/").rstrip("/") in ignoredFiles:
+                    #Acts as a safeguard against file corruption, as those files are not supposed to ever be modified
                     raise Exception("File '%s' has been modified but is ignored by the backup .gitignore" % (relPath))
                 print("Copying %s to %s" % (srcFile, destFile))
-                #os.makedirs(os.path.dirname(destFile), exist_ok=True)
-                #shutil.copy2(srcFile, destFile)
+                os.makedirs(os.path.dirname(destFile), exist_ok=True)
+                shutil.copy2(srcFile, destFile)
